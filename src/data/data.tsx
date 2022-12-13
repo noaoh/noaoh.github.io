@@ -329,7 +329,7 @@ export const experience: TimelineItem[] = [
 
 export const contact: ContactSection = {
   headerText: 'Get in touch.',
-  description: 'Here is a good spot for a message to your readers to let them know how best to reach out to you.',
+  description: 'Please contact me by email for any questions, ideas, or offers.',
   items: [
     {
       type: ContactType.Email,

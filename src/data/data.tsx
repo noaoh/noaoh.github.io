@@ -9,24 +9,21 @@ import {
 } from '@heroicons/react/outline';
 
 import GithubIcon from '../components/Icon/GithubIcon';
-import InstagramIcon from '../components/Icon/InstagramIcon';
 import LinkedInIcon from '../components/Icon/LinkedInIcon';
 import StackOverflowIcon from '../components/Icon/StackOverflowIcon';
-import TwitterIcon from '../components/Icon/TwitterIcon';
-import heroImage from '../images/header-background.webp';
-import porfolioImage1 from '../images/portfolio/portfolio-1.jpg';
-import porfolioImage2 from '../images/portfolio/portfolio-2.jpg';
-import porfolioImage3 from '../images/portfolio/portfolio-3.jpg';
-import porfolioImage4 from '../images/portfolio/portfolio-4.jpg';
-import porfolioImage5 from '../images/portfolio/portfolio-5.jpg';
-import porfolioImage6 from '../images/portfolio/portfolio-6.jpg';
-import porfolioImage7 from '../images/portfolio/portfolio-7.jpg';
-import porfolioImage8 from '../images/portfolio/portfolio-8.jpg';
-import porfolioImage9 from '../images/portfolio/portfolio-9.jpg';
-import porfolioImage10 from '../images/portfolio/portfolio-10.jpg';
-import porfolioImage11 from '../images/portfolio/portfolio-11.jpg';
-import profilepic from '../images/profilepic.jpg';
-import testimonialImage from '../images/testimonial.webp';
+import heroImage from '../../public/header-background.webp';
+import porfolioImage1 from '../../public/portfolio/portfolio-1.jpg';
+import porfolioImage2 from '../../public/portfolio/portfolio-2.jpg';
+import porfolioImage3 from '../../public/portfolio/portfolio-3.jpg';
+import porfolioImage4 from '../../public/portfolio/portfolio-4.jpg';
+import porfolioImage5 from '../../public/portfolio/portfolio-5.jpg';
+import porfolioImage6 from '../../public/portfolio/portfolio-6.jpg';
+import porfolioImage7 from '../../public/portfolio/portfolio-7.jpg';
+import porfolioImage8 from '../../public/portfolio/portfolio-8.jpg';
+import porfolioImage9 from '../../public/portfolio/portfolio-9.jpg';
+import porfolioImage10 from '../../public/portfolio/portfolio-10.jpg';
+import porfolioImage11 from '../../public/portfolio/portfolio-11.jpg';
+import profilepic from '../../public/profilepic.jpg';
 import {
   About,
   ContactSection,
@@ -36,7 +33,6 @@ import {
   PortfolioItem,
   SkillGroup,
   Social,
-  TestimonialSection,
   TimelineItem,
 } from './dataDef';
 
@@ -44,8 +40,8 @@ import {
  * Page meta data
  */
 export const homePageMeta: HomepageMeta = {
-  title: 'React Resume Template',
-  description: "Example site built with Tim Baker's react resume template",
+  title: "Noah Holt's Personal Website",
+  description: "Noah Holt's Personal Website built with Tim Baker's react resume template",
 };
 
 /**
@@ -59,7 +55,6 @@ export const SectionId = {
   Resume: 'resume',
   Skills: 'skills',
   Stats: 'stats',
-  Testimonials: 'testimonials',
 } as const;
 
 export type SectionId = typeof SectionId[keyof typeof SectionId];
@@ -69,24 +64,22 @@ export type SectionId = typeof SectionId[keyof typeof SectionId];
  */
 export const heroData: Hero = {
   imageSrc: heroImage,
-  name: `I'm Tim Baker.`,
+  name: `Hello there, I'm Noah Holt!`,
   description: (
     <>
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
-        I'm a Victoria based <strong className="text-stone-100">Full Stack Software Engineer</strong>, currently working
-        at <strong className="text-stone-100">Instant Domains</strong> helping build a modern, mobile-first, domain
-        registrar and site builder.
+        I'm a Northwest Arkansas based <strong className="text-stone-100">Software Engineer</strong>, currently working
+        at <strong className="text-stone-100">DexCare</strong> helping to build the future of Healthcare by making it easier
+        to get the right appointment, with the right professional, at the right time!
       </p>
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
-        In my free time time, you can catch me training in <strong className="text-stone-100">Muay Thai</strong>,
-        plucking my <strong className="text-stone-100">banjo</strong>, or exploring beautiful{' '}
-        <strong className="text-stone-100">Vancouver Island</strong>.
+        In my free time time, you can catch me running, playing video games, hiking, reading, or coding up a new project!
       </p>
     </>
   ),
   actions: [
     {
-      href: '/assets/resume.pdf',
+      href: '/noah-holt-resume.pdf',
       text: 'Resume',
       primary: true,
       Icon: DownloadIcon,
@@ -104,16 +97,14 @@ export const heroData: Hero = {
  */
 export const aboutData: About = {
   profileImageSrc: profilepic,
-  description: `Use this bio section as your way of describing yourself and saying what you do, what technologies you like
-  to use or feel most comfortable with, describing your personality, or whatever else you feel like throwing
-  in.`,
+  description: `More about me!`,
   aboutItems: [
-    {label: 'Location', text: 'Victoria, BC', Icon: MapIcon},
-    {label: 'Age', text: '29', Icon: CalendarIcon},
-    {label: 'Nationality', text: 'Canadian / Irish', Icon: FlagIcon},
-    {label: 'Interests', text: 'Motorcycles, Muay Thai, Banjos', Icon: SparklesIcon},
-    {label: 'Study', text: 'University of Victoria', Icon: AcademicCapIcon},
-    {label: 'Employment', text: 'Instant Domains, inc.', Icon: OfficeBuildingIcon},
+    {label: 'Location', text: 'Bentonville, AR', Icon: MapIcon},
+    {label: 'Age', text: '24', Icon: CalendarIcon},
+    {label: 'Nationality', text: 'American', Icon: FlagIcon},
+    {label: 'Interests', text: 'Video Games, Music, Linux, Programming', Icon: SparklesIcon},
+    {label: 'Studied At', text: 'University of Arkansas', Icon: AcademicCapIcon},
+    {label: 'Employment', text: 'DexCare', Icon: OfficeBuildingIcon},
   ],
 };
 
@@ -122,36 +113,30 @@ export const aboutData: About = {
  */
 export const skills: SkillGroup[] = [
   {
-    name: 'Spoken languages',
+    name: 'Programming Languages',
     skills: [
       {
-        name: 'English',
-        level: 10,
+        name: 'Rust',
       },
       {
-        name: 'French',
-        level: 4,
+        name: 'Golang',
       },
       {
-        name: 'Spanish',
-        level: 3,
+        name: 'Python',
       },
-    ],
+      {
+        name: 'JavaScript',
+      },
+      {
+        name: 'C#',
+      }
+    ]
   },
   {
     name: 'Frontend development',
     skills: [
       {
         name: 'React',
-        level: 9,
-      },
-      {
-        name: 'Typescript',
-        level: 7,
-      },
-      {
-        name: 'GraphQL',
-        level: 6,
       },
     ],
   },
@@ -159,36 +144,33 @@ export const skills: SkillGroup[] = [
     name: 'Backend development',
     skills: [
       {
-        name: 'Node.js',
-        level: 8,
+        name: 'ExpressJS',
       },
       {
-        name: 'Rust',
-        level: 5,
+        name: 'ASP.NET',
       },
       {
-        name: 'Golang',
-        level: 4,
+        name: 'Flask',
+      },
+      {
+        name: 'Koa'
       },
     ],
   },
   {
-    name: 'Mobile development',
+    name: 'Databases',
     skills: [
       {
-        name: 'React Native',
-        level: 9,
+        name: 'SQL Server',
       },
       {
-        name: 'Flutter',
-        level: 4,
+        name: 'PostgreSQL',
       },
       {
-        name: 'Swift',
-        level: 3,
-      },
-    ],
-  },
+        name: 'Redis'
+      }
+    ]
+  }
 ];
 
 /**
@@ -268,67 +250,78 @@ export const portfolioItems: PortfolioItem[] = [
  */
 export const education: TimelineItem[] = [
   {
-    date: 'April 2007',
-    location: 'Clown college',
-    title: 'Masters in Beer tasting',
-    content: <p>Describe your experience at school, what you learned, what useful skills you have acquired etc.</p>,
-  },
-  {
-    date: 'March 2003',
-    location: 'School of Business',
-    title: 'What did you study 101',
-    content: <p>Describe your experience at school, what you learned, what useful skills you have acquired etc.</p>,
-  },
+    date: 'August 2016 - May 2020',
+    location: 'University of Arkansas',
+    title: 'Bachelor\'s of Science in Computer Science',
+    content: <p>I developed programs in C++, C, Python, and Node.JS, 
+      while not busy with that I was active in my local ACM (Association for Computing Machinery) Chapter
+      where I assisted with putting on Hackathons, Mock Interviews and Information Sessions to assist my fellow students.</p>
+  }
 ];
 
 export const experience: TimelineItem[] = [
   {
-    date: 'March 2010 - Present',
-    location: 'Awesome Development Company',
-    title: 'Senior UX Engineer',
+    date: 'October 2022 - Present',
+    location: 'DexCare',
+    title: 'Software Engineer',
     content: (
       <p>
-        Describe work, special projects, notable achievements, what technologies you have been working with, and
-        anything else that would be useful for an employer to know.
+        Working on backends in NodeJS using the Koa framework to provide slots of time for patients to schedule appointments.
       </p>
     ),
   },
   {
-    date: 'March 2007 - February 2010',
-    location: 'Garage Startup Studio',
-    title: 'Junior bug fixer',
+    date: 'June 2020 - October 2022',
+    location: 'Walmart',
+    title: 'Software Engineer III',
     content: (
       <p>
-        Describe work, special projects, notable achievements, what technologies you have been working with, and
-        anything else that would be useful for an employer to know.
+        For the first half of my time at Walmart, I worked on software that helped stop customer account activity that cost the company half a million dollars per week.
+        For the second half of my time Walmart, I worked on various C# backends and Python scripts to automate workflows for Forensics Investigators working with Walmart.
       </p>
     ),
   },
+  {
+    date: 'June 2019 - August 2019',
+    location: 'Walmart',
+    title: 'Software Development Engineer Intern',
+    content: (
+      <p>
+        Worked on integrating together a ticketing system and a case management system; also refactored authentication for web services.
+      </p>
+    ),
+  },
+  {
+    date: 'June 2018 - August 2018',
+    location: 'ABCFinancial',
+    title: 'DevOps Intern',
+    content: (
+      <p>
+        Responsible for proof-of-concept system containerizing Java applications and deploying them via Jenkins. Also developed applications to extract and upload computer setup information.
+      </p>
+    ),
+  },
+  {
+    date: 'June 2017 - August 2017',
+    location: 'North Little Rock City Government',
+    title: 'IT Department Intern',
+    content: (
+      <p>
+        I assisted in the management of data using PowerShell. I also archived old files and machinery, converting a storage room into a training room.
+      </p>
+    ),
+  },
+  {
+    date: 'June 2016 - August 2016',
+    location: 'North Little Rock City Government',
+    title: 'Planning Department Intern',
+    content: (
+      <p>
+        I assisted in the management of data through PowerShell, and other archival tasks.
+      </p>
+    ),
+  }
 ];
-
-/**
- * Testimonial section
- */
-export const testimonial: TestimonialSection = {
-  imageSrc: testimonialImage,
-  testimonials: [
-    {
-      name: 'John Doe',
-      text: 'Use this as an opportunity to promote what it is like to work with you. High value testimonials include ones from current or past co-workers, managers, or from happy clients.',
-      image: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/169.jpg',
-    },
-    {
-      name: 'Jane Doe',
-      text: 'Here you should write some nice things that someone has said about you. Encourage them to be specific and include important details (notes about a project you were on together, impressive quality produced, etc).',
-      image: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/14.jpg',
-    },
-    {
-      name: 'Someone else',
-      text: 'Add several of these, and keep them as fresh as possible, but be sure to focus on quality testimonials with strong highlights of your skills/work ethic.',
-      image: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/69.jpg',
-    },
-  ],
-};
 
 /**
  * Contact section
@@ -340,23 +333,17 @@ export const contact: ContactSection = {
   items: [
     {
       type: ContactType.Email,
-      text: 'reachout@timbaker.me',
-      href: 'mailto:reachout@timbaker.me',
+      text: 'noahyranholt@gmail.com',
+      href: 'mailto:noahryanholt@gmail.com',
     },
     {
       type: ContactType.Location,
-      text: 'Victoria BC, Canada',
-      href: 'https://www.google.ca/maps/place/Victoria,+BC/@48.4262362,-123.376775,14z',
-    },
-    {
-      type: ContactType.Instagram,
-      text: '@tbakerx',
-      href: 'https://www.instagram.com/tbakerx/',
+      text: 'Bentonville, AR'
     },
     {
       type: ContactType.Github,
-      text: 'tbakerx',
-      href: 'https://github.com/tbakerx',
+      text: 'noaoh',
+      href: 'https://github.com/noaoh',
     },
   ],
 };
@@ -365,9 +352,7 @@ export const contact: ContactSection = {
  * Social items
  */
 export const socialLinks: Social[] = [
-  {label: 'Github', Icon: GithubIcon, href: 'https://github.com/tbakerx'},
-  {label: 'Stack Overflow', Icon: StackOverflowIcon, href: 'https://stackoverflow.com/users/8553186/tim-baker'},
-  {label: 'LinkedIn', Icon: LinkedInIcon, href: 'https://www.linkedin.com/in/timbakerx/'},
-  {label: 'Instagram', Icon: InstagramIcon, href: 'https://www.instagram.com/tbakerx/'},
-  {label: 'Twitter', Icon: TwitterIcon, href: 'https://twitter.com/TimBakerx'},
+  {label: 'Github', Icon: GithubIcon, href: 'https://github.com/noaoh'},
+  {label: 'Stack Overflow', Icon: StackOverflowIcon, href: 'https://stackoverflow.com/users/5104135/noaoh'},
+  {label: 'LinkedIn', Icon: LinkedInIcon, href: 'https://www.linkedin.com/in/noah-holt-sde'},
 ];

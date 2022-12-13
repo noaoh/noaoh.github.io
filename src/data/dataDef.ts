@@ -64,7 +64,6 @@ export interface Stat {
 
 export interface Skill {
   name: string;
-  level: number;
   max?: number;
 }
 
@@ -94,20 +93,6 @@ export interface TimelineItem {
 }
 
 /**
- * Testimonial section
- */
-export interface TestimonialSection {
-  imageSrc?: string | StaticImageData;
-  testimonials: Testimonial[];
-}
-
-export interface Testimonial {
-  image?: string;
-  name: string;
-  text: string;
-}
-
-/**
  * Contact section
  */
 export interface ContactSection {
@@ -122,9 +107,6 @@ export const ContactType = {
   Location: 'Location',
   Github: 'Github',
   LinkedIn: 'LinkedIn',
-  Facebook: 'Facebook',
-  Twitter: 'Twitter',
-  Instagram: 'Instagram',
 } as const;
 
 export type ContactType = typeof ContactType[keyof typeof ContactType];

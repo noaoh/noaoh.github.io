@@ -7,7 +7,7 @@ import { Sections } from '../data/data';
 export const useNavObserver = (selectors: SectionType[], handler: (section: SectionType | null) => void) => {
   useEffect(() => {
     // Get all sections
-    const headings = document.querySelectorAll(selectors.filter(selector => selector.isOnHomepage).map(selector => `${selector.name}`).join(','));
+    const headings = document.querySelectorAll(selectors.filter(selector => selector.isOnHomepage).map(selector => selector.urlName).join(','));
     const headingsArray = Array.from(headings);
     const headerWrapper = document.getElementById(headerID);
 
@@ -29,7 +29,7 @@ export const useNavObserver = (selectors: SectionType[], handler: (section: Sect
             };
             if (decision.isIntersecting) {
               // Header at 30% from the top, update to current header
-              handler(Object.values(Sections).find(x => x.name === decision.id) as SectionType);
+              handler(Object.values(Sections).find(x => x.urlName === decision.id) as SectionType);
             } else if (
               !decision.isIntersecting &&
               decision.currentRatio < 1 &&
@@ -37,7 +37,7 @@ export const useNavObserver = (selectors: SectionType[], handler: (section: Sect
               decision.belowToc
             ) {
               const currentVisible = headingsArray[decision.currentIndex - 1]?.getAttribute('id');
-              handler(Object.values(Sections).find(x => x.name === currentVisible) as SectionType);
+              handler(Object.values(Sections).find(x => x.urlName === currentVisible) as SectionType);
             }
           }
         });

@@ -45,7 +45,7 @@ const DesktopNav: FC<{navSections: SectionType[]; currentSection: SectionType | 
               activeClass={activeClass}
               current={section === currentSection}
               inactiveClass={inactiveClass}
-              key={section.name}
+              key={section.urlName}
               section={section}
             />
           ))}
@@ -103,7 +103,7 @@ const MobileNav: FC<{navSections: SectionType[]; currentSection: SectionType | n
                       activeClass={activeClass}
                       current={section === currentSection}
                       inactiveClass={inactiveClass}
-                      key={section.name}
+                      key={section.urlName}
                       onClick={toggleOpen}
                       section={section}
                     />
@@ -126,9 +126,9 @@ const NavItem: FC<{
   onClick?: () => void;
 }> = memo(({section, current, inactiveClass, activeClass, onClick}) => {
   return (
-    <Link href={section.isOnHomepage ? `/#${section.name}` : `/${section.name}`} passHref>
-      <a className={classNames(current ? activeClass : inactiveClass)} key={section.name} onClick={onClick}>
-        {section.name}
+    <Link href={section.isOnHomepage ? `/#${section.urlName}` : `/${section.urlName}`} passHref>
+      <a className={classNames(current ? activeClass : inactiveClass)} key={section.urlName} onClick={onClick}>
+        {section.displayName}
       </a>
     </Link>
   );

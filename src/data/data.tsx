@@ -48,12 +48,12 @@ export const homePageMeta: HomepageMeta = {
  * Section definition
  */
 export const Sections = {
-  Hero: { name: 'hero', isOnNavBar: false, isOnHomepage: true },
-  About: { name: 'about', isOnNavBar: true, isOnHomepage: true },
-  Contact: { name: 'contact', isOnNavBar: true, isOnHomepage: true },
-  Portfolio: { name: 'portfolio', isOnNavBar: true, isOnHomepage: true },
-  Resume: { name: 'resume', isOnNavBar: true, isOnHomepage: true },
-  CurrentlyListening: { name: 'currentlyListening', isOnNavBar: true, isOnHomepage: false }
+  Hero: { urlName: 'hero', displayName: 'hero', isOnNavBar: false, isOnHomepage: true },
+  About: { urlName: 'about', displayName: 'about', isOnNavBar: true, isOnHomepage: true },
+  Resume: { urlName: 'resume', displayName: 'resume', isOnNavBar: true, isOnHomepage: true },
+  Portfolio: { urlName: 'portfolio', displayName: 'portfolio', isOnNavBar: true, isOnHomepage: true },
+  Contact: { urlName: 'contact', displayName: 'contact', isOnNavBar: true, isOnHomepage: true },
+  CurrentlyListening: { urlName: 'currentlyListening', displayName: 'currently listening', isOnNavBar: true, isOnHomepage: false }
 } as const;
 
 /**
@@ -82,7 +82,7 @@ export const heroData: Hero = {
       Icon: DownloadIcon,
     },
     {
-      href: `#${Sections.Contact.name}`,
+      href: `#${Sections.Contact.urlName}`,
       text: 'Contact',
       primary: false,
     },

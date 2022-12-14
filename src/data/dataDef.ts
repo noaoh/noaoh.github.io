@@ -132,7 +132,8 @@ export interface Social {
 }
 
 export interface SectionType {
-  name: string;
+  displayName: string;
+  urlName: string;
   isOnHomepage: boolean;
   isOnNavBar: boolean;
 }

@@ -126,7 +126,7 @@ const NavItem: FC<{
   onClick?: () => void;
 }> = memo(({section, current, inactiveClass, activeClass, onClick}) => {
   return (
-    <Link href={`/#${section.name}`} passHref>
+    <Link href={section.isOnHomepage ? `/#${section.name}` : `/${section.name}`} passHref>
       <a className={classNames(current ? activeClass : inactiveClass)} key={section.name} onClick={onClick}>
         {section.name}
       </a>

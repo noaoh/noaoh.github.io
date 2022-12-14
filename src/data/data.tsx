@@ -53,6 +53,7 @@ export const Sections = {
   Contact: { name: 'contact', isOnNavBar: true, isOnHomepage: true },
   Portfolio: { name: 'portfolio', isOnNavBar: true, isOnHomepage: true },
   Resume: { name: 'resume', isOnNavBar: true, isOnHomepage: true },
+  CurrentlyListening: { name: 'currentlyListening', isOnNavBar: true, isOnHomepage: false }
 } as const;
 
 /**
@@ -64,7 +65,7 @@ export const heroData: Hero = {
   description: (
     <>
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
-        I'm a Northwest Arkansas based <strong className="text-stone-100">Software Engineer</strong>, currently working
+        I'm a Northwest Arkansas based <strong className="text-stone-100">Backend Software Engineer</strong>, currently working
         at <strong className="text-stone-100">DexCare</strong> helping to build the future of Healthcare by making it easier
         to get the right appointment, with the right professional, at the right time!
       </p>

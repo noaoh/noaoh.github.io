@@ -1,12 +1,13 @@
 import {useEffect} from 'react';
 
 import {headerID} from '../components/Sections/Header';
-import {SectionId} from '../data/data';
+import { SectionType } from '../data/dataDef';
+import { Sections } from '../data/data';
 
-export const useNavObserver = (selectors: string, handler: (section: SectionId | null) => void) => {
+export const useNavObserver = (selectors: SectionType[], handler: (section: SectionType | null) => void) => {
   useEffect(() => {
     // Get all sections
-    const headings = document.querySelectorAll(selectors);
+    const headings = document.querySelectorAll(selectors.map(selector => `${selector.name}`).join(','));
     const headingsArray = Array.from(headings);
     const headerWrapper = document.getElementById(headerID);
 
@@ -28,7 +29,7 @@ export const useNavObserver = (selectors: string, handler: (section: SectionId |
             };
             if (decision.isIntersecting) {
               // Header at 30% from the top, update to current header
-              handler(decision.id as SectionId);
+              handler(Object.values(Sections).find(x => x.name === decision.id) as SectionType);
             } else if (
               !decision.isIntersecting &&
               decision.currentRatio < 1 &&
@@ -36,7 +37,7 @@ export const useNavObserver = (selectors: string, handler: (section: SectionId |
               decision.belowToc
             ) {
               const currentVisible = headingsArray[decision.currentIndex - 1]?.getAttribute('id');
-              handler(currentVisible as SectionId);
+              handler(Object.values(Sections).find(x => x.name === currentVisible) as SectionType);
             }
           }
         });

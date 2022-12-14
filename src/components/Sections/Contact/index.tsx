@@ -2,7 +2,7 @@ import {DeviceMobileIcon, LocationMarkerIcon, MailIcon} from '@heroicons/react/o
 import classNames from 'classnames';
 import {FC, memo} from 'react';
 
-import {contact, SectionId} from '../../../data/data';
+import {contact, Sections} from '../../../data/data';
 import {ContactType, ContactValue} from '../../../data/dataDef';
 import GithubIcon from '../../Icon/GithubIcon';
 import LinkedInIcon from '../../Icon/LinkedInIcon';
@@ -19,7 +19,7 @@ const ContactValueMap: Record<ContactType, ContactValue> = {
 const Contact: FC = memo(() => {
   const {headerText, description, items} = contact;
   return (
-    <Section className="bg-neutral-800" sectionId={SectionId.Contact}>
+    <Section className="bg-neutral-800" section={Sections.Contact}>
       <div className="flex flex-col gap-y-6">
         <div className="flex flex-col gap-6 md:flex-row md:items-center">
           <MailIcon className="hidden h-16 w-16 text-white md:block" />

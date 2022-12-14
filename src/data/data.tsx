@@ -47,17 +47,13 @@ export const homePageMeta: HomepageMeta = {
 /**
  * Section definition
  */
-export const SectionId = {
-  Hero: 'hero',
-  About: 'about',
-  Contact: 'contact',
-  Portfolio: 'portfolio',
-  Resume: 'resume',
-  Skills: 'skills',
-  Stats: 'stats',
+export const Sections = {
+  Hero: { name: 'hero', isOnNavBar: false, isOnHomepage: true },
+  About: { name: 'about', isOnNavBar: true, isOnHomepage: true },
+  Contact: { name: 'contact', isOnNavBar: true, isOnHomepage: true },
+  Portfolio: { name: 'portfolio', isOnNavBar: true, isOnHomepage: true },
+  Resume: { name: 'resume', isOnNavBar: true, isOnHomepage: true },
 } as const;
-
-export type SectionId = typeof SectionId[keyof typeof SectionId];
 
 /**
  * Hero section
@@ -85,7 +81,7 @@ export const heroData: Hero = {
       Icon: DownloadIcon,
     },
     {
-      href: `#${SectionId.Contact}`,
+      href: `#${Sections.Contact.name}`,
       text: 'Contact',
       primary: false,
     },

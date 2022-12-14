@@ -130,3 +130,9 @@ export interface Social {
   Icon: FC<IconProps>;
   href: string;
 }
+
+export interface SectionType {
+  name: string;
+  isOnHomepage: boolean;
+  isOnNavBar: boolean;
+}

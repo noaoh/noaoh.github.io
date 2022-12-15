@@ -2,7 +2,7 @@
 const isProd = process.env.NODE_ENV === 'production';
 
 // https://github.com/vercel/next.js/blob/master/packages/next/next-server/server/config.ts
-const nextConfig = {
+let nextConfig = {
   webpack: config => {
     const oneOfRule = config.module.rules.find(rule => rule.oneOf);
 
@@ -34,5 +34,20 @@ const nextConfig = {
   },
   assetPrefix: isProd ? './' : '.',
 };
+
+
+/**
+ * Github pages
+ */
+if (process.env.GITHUB_REPOSITORY && ['phase-production-build', 'phase-export'].includes(phase)) {
+
+  const repositoryName = process.env.GITHUB_REPOSITORY.split('/')[1];
+
+  nextConfig = {
+    ...nextConfig,
+    assetPrefix: `/${repositoryName}/`,
+    basePath: `/${repositoryName}`,
+  }
+}
 
 module.exports = nextConfig;

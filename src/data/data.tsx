@@ -51,7 +51,7 @@ export const Sections = {
   Hero: {urlName: 'hero', displayName: 'hero', isOnNavBar: false, isOnHomepage: true},
   About: {urlName: 'about', displayName: 'about', isOnNavBar: true, isOnHomepage: true},
   Resume: {urlName: 'resume', displayName: 'resume', isOnNavBar: true, isOnHomepage: true},
-  Portfolio: {urlName: 'portfolio', displayName: 'portfolio', isOnNavBar: true, isOnHomepage: true},
+  Portfolio: {urlName: 'portfolio', displayName: 'portfolio', isOnNavBar: false, isOnHomepage: false},
   Contact: {urlName: 'contact', displayName: 'contact', isOnNavBar: true, isOnHomepage: true},
   CurrentlyListening: {urlName: 'currentlyListening', displayName: 'currently listening', isOnNavBar: true, isOnHomepage: false}
 } as const;

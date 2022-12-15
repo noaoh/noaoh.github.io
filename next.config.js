@@ -32,7 +32,15 @@ let nextConfig = {
     domains: ['images.unsplash.com', 'source.unsplash.com'],
     unoptimized: true,
   },
-  assetPrefix: isProd ? './' : '.',
 };
+
+if (process.env.GITHUB_REPOSITORY) {
+  const repositoryName = process.env.GITHUB_REPOSITORY.split('/')[1];
+  nextConfig =  {
+    ...nextConfig,
+    assetPrefix: `/${repositoryName}/`,
+    basePath: `/${repositoryName}`, 
+  }
+}
 
 module.exports = nextConfig;

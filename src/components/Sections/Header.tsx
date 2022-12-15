@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import {FC, Fragment, memo, useCallback, useMemo, useState} from 'react';
 
-import { SectionType } from '../../data/dataDef';
 import {Sections} from '../../data/data';
+import {SectionType} from '../../data/dataDef';
 import {useNavObserver} from '../../hooks/useNavObserver';
 
 export const headerID = 'headerNav';

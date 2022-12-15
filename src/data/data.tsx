@@ -8,9 +8,6 @@ import {
   SparklesIcon,
 } from '@heroicons/react/outline';
 
-import GithubIcon from '../components/Icon/GithubIcon';
-import LinkedInIcon from '../components/Icon/LinkedInIcon';
-import StackOverflowIcon from '../components/Icon/StackOverflowIcon';
 import heroImage from '../../public/header-background.webp';
 import porfolioImage1 from '../../public/portfolio/portfolio-1.jpg';
 import porfolioImage2 from '../../public/portfolio/portfolio-2.jpg';
@@ -24,6 +21,9 @@ import porfolioImage9 from '../../public/portfolio/portfolio-9.jpg';
 import porfolioImage10 from '../../public/portfolio/portfolio-10.jpg';
 import porfolioImage11 from '../../public/portfolio/portfolio-11.jpg';
 import profilepic from '../../public/profilepic.jpg';
+import GithubIcon from '../components/Icon/GithubIcon';
+import LinkedInIcon from '../components/Icon/LinkedInIcon';
+import StackOverflowIcon from '../components/Icon/StackOverflowIcon';
 import {
   About,
   ContactSection,
@@ -48,12 +48,12 @@ export const homePageMeta: HomepageMeta = {
  * Section definition
  */
 export const Sections = {
-  Hero: { urlName: 'hero', displayName: 'hero', isOnNavBar: false, isOnHomepage: true },
-  About: { urlName: 'about', displayName: 'about', isOnNavBar: true, isOnHomepage: true },
-  Resume: { urlName: 'resume', displayName: 'resume', isOnNavBar: true, isOnHomepage: true },
-  Portfolio: { urlName: 'portfolio', displayName: 'portfolio', isOnNavBar: true, isOnHomepage: true },
-  Contact: { urlName: 'contact', displayName: 'contact', isOnNavBar: true, isOnHomepage: true },
-  CurrentlyListening: { urlName: 'currentlyListening', displayName: 'currently listening', isOnNavBar: true, isOnHomepage: false }
+  Hero: {urlName: 'hero', displayName: 'hero', isOnNavBar: false, isOnHomepage: true},
+  About: {urlName: 'about', displayName: 'about', isOnNavBar: true, isOnHomepage: true},
+  Resume: {urlName: 'resume', displayName: 'resume', isOnNavBar: true, isOnHomepage: true},
+  Portfolio: {urlName: 'portfolio', displayName: 'portfolio', isOnNavBar: true, isOnHomepage: true},
+  Contact: {urlName: 'contact', displayName: 'contact', isOnNavBar: true, isOnHomepage: true},
+  CurrentlyListening: {urlName: 'currentlyListening', displayName: 'currently listening', isOnNavBar: true, isOnHomepage: false}
 } as const;
 
 /**

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import {FC, memo} from 'react';
 
-import { SectionType } from '../../data/dataDef';
+import {SectionType} from '../../data/dataDef';
 
 const Section: FC<{section: SectionType; sectionTitle?: string; noPadding?: boolean; className?: string}> = memo(
   ({children, section, noPadding = false, className}) => {

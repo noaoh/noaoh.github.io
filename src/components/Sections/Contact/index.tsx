@@ -9,11 +9,11 @@ import LinkedInIcon from '../../Icon/LinkedInIcon';
 import Section from '../../Layout/Section';
 
 const ContactValueMap: Record<ContactType, ContactValue> = {
-  [ContactType.Email]: { Icon: MailIcon, srLabel: 'Email' },
-  [ContactType.Phone]: { Icon: DeviceMobileIcon, srLabel: 'Phone' },
-  [ContactType.Location]: { Icon: LocationMarkerIcon, srLabel: 'Location' },
-  [ContactType.Github]: { Icon: GithubIcon, srLabel: 'Github' },
-  [ContactType.LinkedIn]: { Icon: LinkedInIcon, srLabel: 'LinkedIn' },
+  [ContactType.Email]: {Icon: MailIcon, srLabel: 'Email'},
+  [ContactType.Phone]: {Icon: DeviceMobileIcon, srLabel: 'Phone'},
+  [ContactType.Location]: {Icon: LocationMarkerIcon, srLabel: 'Location'},
+  [ContactType.Github]: {Icon: GithubIcon, srLabel: 'Github'},
+  [ContactType.LinkedIn]: {Icon: LinkedInIcon, srLabel: 'LinkedIn'},
 };
 
 const Contact: FC = memo(() => {

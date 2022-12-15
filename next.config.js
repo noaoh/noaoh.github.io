@@ -35,19 +35,4 @@ let nextConfig = {
   assetPrefix: isProd ? './' : '.',
 };
 
-
-/**
- * Github pages
- */
-if (process.env.GITHUB_REPOSITORY && ['phase-production-build', 'phase-export'].includes(phase)) {
-
-  const repositoryName = process.env.GITHUB_REPOSITORY.split('/')[1];
-
-  nextConfig = {
-    ...nextConfig,
-    assetPrefix: `/${repositoryName}/`,
-    basePath: `/${repositoryName}`,
-  }
-}
-
 module.exports = nextConfig;

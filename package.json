@@ -8,7 +8,7 @@
     "compile": "yarn run -T tsc --build --verbose",
     "dev": "yarn compile && yarn next dev",
     "lint": "yarn run -T prettier --write './src/**/*.{js,jsx,json,ts,tsx}' && eslint './src/**/*.{js,jsx,ts,tsx}' --fix --max-warnings=0",
-    "export": "yarn next export",
+    "export": "yarn next export && touch out/.nojekyll",
     "start": "yarn next start",
     "sitemap": "yarn next-sitemap"
   },

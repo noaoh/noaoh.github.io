@@ -26,6 +26,7 @@ jobs:
 
       - name: Build
         run: |
+          yarn install typescript
           yarn install
           yarn run build
           yarn run export

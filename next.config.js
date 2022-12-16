@@ -1,10 +1,8 @@
-const { default: next } = require("next");
-
 /* eslint-env node */
 const isProd = process.env.NODE_ENV === 'production';
 
 // https://github.com/vercel/next.js/blob/master/packages/next/next-server/server/config.ts
-let nextConfig = {
+const nextConfig = {
   webpack: config => {
     const oneOfRule = config.module.rules.find(rule => rule.oneOf);
 
@@ -32,21 +30,8 @@ let nextConfig = {
   trailingSlash: false,
   images: {
     domains: ['images.unsplash.com', 'source.unsplash.com'],
-    unoptimized: true,
   },
+  assetPrefix: isProd ? 'https://noaoh.github.io/' : undefined
 };
 
-module.exports = (phase, defaultConfig) => {
-  if (process.env.GITHUB_REPOSITORY && ['phase-production-build', 'phase-export'].includes(phase)) {
-
-    const repositoryName = process.env.GITHUB_REPOSITORY.split('/')[1];
-
-    defaultConfig = {
-      ...nextConfig,
-      assetPrefix: `/${repositoryName}/`,
-      basePath: `/${repositoryName}`,
-    }
-  }
-
-  return defaultConfig;
-}
+module.exports = nextConfig;

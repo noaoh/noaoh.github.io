@@ -1,3 +1,5 @@
+const { default: next } = require("next");
+
 /* eslint-env node */
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -34,13 +36,17 @@ let nextConfig = {
   },
 };
 
-if (process.env.GITHUB_REPOSITORY) {
-  const repositoryName = process.env.GITHUB_REPOSITORY.split('/')[1];
-  nextConfig =  {
-    ...nextConfig,
-    assetPrefix: `/${repositoryName}/`,
-    basePath: `/${repositoryName}`, 
-  }
-}
+module.exports = (phase, defaultConfig) => {
+  if (process.env.GITHUB_REPOSITORY && ['phase-production-build', 'phase-export'].includes(phase)) {
 
-module.exports = nextConfig;
+    const repositoryName = process.env.GITHUB_REPOSITORY.split('/')[1];
+
+    defaultConfig = {
+      ...nextConfig,
+      assetPrefix: `/${repositoryName}/`,
+      basePath: `/${repositoryName}`,
+    }
+  }
+
+  return defaultConfig;
+}

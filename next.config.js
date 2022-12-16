@@ -1,5 +1,5 @@
 /* eslint-env node */
-const isProd = process.env.NODE_ENV === 'production';
+const isGhPages = process.env.IS_GH_PAGES === 'true';
 
 // https://github.com/vercel/next.js/blob/master/packages/next/next-server/server/config.ts
 const nextConfig = {
@@ -31,7 +31,7 @@ const nextConfig = {
   images: {
     domains: ['images.unsplash.com', 'source.unsplash.com'],
   },
-  assetPrefix: isProd ? 'https://noaoh.github.io/' : undefined
+  assetPrefix: isGhPages ? 'https://noaoh.github.io/' : undefined
 };
 
 module.exports = nextConfig;

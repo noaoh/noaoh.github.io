@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  NODE_ENV: production
+  IS_GH_PAGES: 'true'
 
 jobs:
   deployment:

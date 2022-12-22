@@ -53,7 +53,12 @@ export const Sections = {
   Resume: {urlName: 'resume', displayName: 'resume', isOnNavBar: true, isOnHomepage: true},
   Portfolio: {urlName: 'portfolio', displayName: 'portfolio', isOnNavBar: false, isOnHomepage: false},
   Contact: {urlName: 'contact', displayName: 'contact', isOnNavBar: true, isOnHomepage: true},
-  CurrentlyListening: {urlName: 'currentlyListening', displayName: 'currently listening', isOnNavBar: true, isOnHomepage: false}
+  CurrentlyListening: {
+    urlName: 'currentlyListening',
+    displayName: 'currently listening',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  },
 } as const;
 
 /**
@@ -65,12 +70,13 @@ export const heroData: Hero = {
   description: (
     <>
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
-        I'm a Northwest Arkansas based <strong className="text-stone-100">Backend Software Engineer</strong>, currently working
-        at <strong className="text-stone-100">DexCare</strong> helping to build the future of Healthcare by making it easier
-        to get the right appointment, with the right professional, at the right time!
+        I'm a Northwest Arkansas based <strong className="text-stone-100">Backend Software Engineer</strong>, currently
+        working at <strong className="text-stone-100">DexCare</strong> helping to build the future of Healthcare by
+        making it easier to get the right appointment, with the right professional, at the right time!
       </p>
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
-        In my free time time, you can catch me running, playing video games, hiking, reading, or coding up a new project!
+        In my free time time, you can catch me running, playing video games, hiking, reading, or coding up a new
+        project!
       </p>
     </>
   ),
@@ -126,8 +132,8 @@ export const skills: SkillGroup[] = [
       },
       {
         name: 'C#',
-      }
-    ]
+      },
+    ],
   },
   {
     name: 'Frontend development',
@@ -150,7 +156,7 @@ export const skills: SkillGroup[] = [
         name: 'Flask',
       },
       {
-        name: 'Koa'
+        name: 'Koa',
       },
     ],
   },
@@ -164,10 +170,10 @@ export const skills: SkillGroup[] = [
         name: 'PostgreSQL',
       },
       {
-        name: 'Redis'
-      }
-    ]
-  }
+        name: 'Redis',
+      },
+    ],
+  },
 ];
 
 /**
@@ -249,11 +255,15 @@ export const education: TimelineItem[] = [
   {
     date: 'August 2016 - May 2020',
     location: 'University of Arkansas',
-    title: 'Bachelor\'s of Science in Computer Science',
-    content: <p>I developed programs in C++, C, Python, and Node.JS, 
-      while not busy with that I was active in my local ACM (Association for Computing Machinery) Chapter
-      where I assisted with putting on Hackathons, Mock Interviews and Information Sessions to assist my fellow students.</p>
-  }
+    title: "Bachelor's of Science in Computer Science",
+    content: (
+      <p>
+        I developed programs in C++, C, Python, and Node.JS, while not busy with that I was active in my local ACM
+        (Association for Computing Machinery) Chapter where I assisted with putting on Hackathons, Mock Interviews and
+        Information Sessions to assist my fellow students.
+      </p>
+    ),
+  },
 ];
 
 export const experience: TimelineItem[] = [
@@ -263,7 +273,8 @@ export const experience: TimelineItem[] = [
     title: 'Software Engineer',
     content: (
       <p>
-        Working on backends in NodeJS using the Koa framework to provide slots of time for patients to schedule appointments.
+        Working on backends in NodeJS using the Koa framework to provide slots of time for patients to schedule
+        appointments.
       </p>
     ),
   },
@@ -273,8 +284,9 @@ export const experience: TimelineItem[] = [
     title: 'Software Engineer III',
     content: (
       <p>
-        For the first half of my time at Walmart, I worked on software that helped stop customer account activity that cost the company half a million dollars per week.
-        For the second half of my time Walmart, I worked on various C# backends and Python scripts to automate workflows for Forensics Investigators working with Walmart.
+        For the first half of my time at Walmart, I worked on software that helped stop customer account activity that
+        cost the company half a million dollars per week. For the second half of my time Walmart, I worked on various C#
+        backends and Python scripts to automate workflows for Forensics Investigators working with Walmart.
       </p>
     ),
   },
@@ -284,7 +296,8 @@ export const experience: TimelineItem[] = [
     title: 'Software Development Engineer Intern',
     content: (
       <p>
-        Worked on integrating together a ticketing system and a case management system; also refactored authentication for web services.
+        Worked on integrating together a ticketing system and a case management system; also refactored authentication
+        for web services.
       </p>
     ),
   },
@@ -294,7 +307,8 @@ export const experience: TimelineItem[] = [
     title: 'DevOps Intern',
     content: (
       <p>
-        Responsible for proof-of-concept system containerizing Java applications and deploying them via Jenkins. Also developed applications to extract and upload computer setup information.
+        Responsible for proof-of-concept system containerizing Java applications and deploying them via Jenkins. Also
+        developed applications to extract and upload computer setup information.
       </p>
     ),
   },
@@ -304,7 +318,8 @@ export const experience: TimelineItem[] = [
     title: 'IT Department Intern',
     content: (
       <p>
-        I assisted in the management of data using PowerShell. I also archived old files and machinery, converting a storage room into a training room.
+        I assisted in the management of data using PowerShell. I also archived old files and machinery, converting a
+        storage room into a training room.
       </p>
     ),
   },
@@ -312,12 +327,8 @@ export const experience: TimelineItem[] = [
     date: 'June 2016 - August 2016',
     location: 'North Little Rock City Government',
     title: 'Planning Department Intern',
-    content: (
-      <p>
-        I assisted in the management of data through PowerShell, and other archival tasks.
-      </p>
-    ),
-  }
+    content: <p>I assisted in the management of data through PowerShell, and other archival tasks.</p>,
+  },
 ];
 
 /**
@@ -335,7 +346,7 @@ export const contact: ContactSection = {
     },
     {
       type: ContactType.Location,
-      text: 'Bentonville, AR'
+      text: 'Bentonville, AR',
     },
     {
       type: ContactType.Github,

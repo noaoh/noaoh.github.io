@@ -7,7 +7,12 @@ import {SectionType} from '../data/dataDef';
 export const useNavObserver = (selectors: SectionType[], handler: (section: SectionType | null) => void) => {
   useEffect(() => {
     // Get all sections
-    const headings = document.querySelectorAll(selectors.filter(selector => selector.isOnHomepage).map(selector => selector.urlName).join(','));
+    const headings = document.querySelectorAll(
+      selectors
+        .filter(selector => selector.isOnHomepage)
+        .map(selector => selector.urlName)
+        .join(','),
+    );
     const headingsArray = Array.from(headings);
     const headerWrapper = document.getElementById(headerID);
 

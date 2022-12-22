@@ -1,4 +1,5 @@
 import fetch from 'cross-fetch';
+import Head from 'next/head';
 import {FC, PropsWithChildren, useEffect, useState} from 'react';
 
 // Adapted from https://github.com/rasshofer/and
@@ -92,21 +93,27 @@ const CurrentlyListening: FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  if (!currListening.isPlaying) {
-    return <NotCurrentlyListening />;
-  } else {
-    if (currListening.type === 'episode') {
-      return <Podcast episode={currListening.episode as string} podcast={currListening.podcast as string} />;
-    } else {
-      return (
-        <Track
-          album={currListening.album as string}
-          artists={currListening.artists as string[]}
-          track={currListening.track as string}
-        />
-      );
-    }
-  }
+  return (
+    <>
+      <Head>
+        <title>Currently Listening</title>
+      </Head>
+      <h1>What I'm Currently Listening to</h1>
+      {currListening.isPlaying ? (
+        currListening.type === 'episode' ? (
+          <Podcast episode={currListening.episode as string} podcast={currListening.podcast as string} />
+        ) : (
+          <Track
+            album={currListening.album as string}
+            artists={currListening.artists as string[]}
+            track={currListening.track as string}
+          />
+        )
+      ) : (
+        <NotCurrentlyListening />
+      )}
+    </>
+  );
 };
 
 export default CurrentlyListening;

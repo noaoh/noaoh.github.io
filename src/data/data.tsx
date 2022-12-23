@@ -55,7 +55,13 @@ export const Sections = {
   Contact: {urlName: 'contact', displayName: 'contact', isOnNavBar: true, isOnHomepage: true},
   CurrentlyListening: {
     urlName: 'currentlyListening',
-    displayName: 'currently listening',
+    displayName: 'Currently listening',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  },
+  VinylCollection: {
+    urlName: 'vinylCollection',
+    displayName: 'Vinyl Collection',
     isOnNavBar: true,
     isOnHomepage: false,
   },

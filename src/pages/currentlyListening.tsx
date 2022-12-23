@@ -2,16 +2,7 @@ import fetch from 'cross-fetch';
 import Head from 'next/head';
 import {FC, PropsWithChildren, useEffect, useState} from 'react';
 
-// Adapted from https://github.com/rasshofer/and
-const and = (data: Array<string>, separator = '&', oxfordComma = false) => {
-  const items = data.length;
-  const lastItem = data.pop();
-  if (data.length) {
-    return `${data.join(', ')}${oxfordComma && items > 2 ? ',' : ''} ${separator} ${lastItem}`.trim();
-  } else {
-    return lastItem;
-  }
-};
+import {and} from '../utils';
 
 interface CurrentlyListeningPayload {
   isPlaying: boolean;

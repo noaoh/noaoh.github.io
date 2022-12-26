@@ -78,7 +78,9 @@ const CurrentlyListening: FC = () => {
     getCurrentlyListening();
 
     const interval = setInterval(() => {
-      getCurrentlyListening();
+      if (!document.hidden) {
+        getCurrentlyListening();
+      }
     }, 10000);
 
     return () => clearInterval(interval);

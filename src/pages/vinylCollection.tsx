@@ -12,11 +12,12 @@ interface VinylItemProps {
 }
 
 const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps) => {
+  const formattedDate = new Date(props.dateAdded).toLocaleDateString();
   return (
     <div>
       <p>
-        <Image alt="Image didn't load" height="100" src={props.thumbnail} width="100" />{' '}
-        <strong>{and(props.artists, 'and')}</strong> - <strong>{props.album}</strong>
+        <Image alt="Image didn't load" height="200" src={props.thumbnail} width="200" /> <strong>{props.album}</strong>{' '}
+        by <strong>{and(props.artists, 'and')}</strong> added to my collection on <strong>{formattedDate}</strong>
       </p>
     </div>
   );

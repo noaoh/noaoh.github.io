@@ -7,7 +7,8 @@ import Contact from '../components/Sections/Contact';
 import Footer from '../components/Sections/Footer';
 import Hero from '../components/Sections/Hero';
 import Resume from '../components/Sections/Resume';
-import {homePageMeta} from '../data/data';
+import {homePageMeta, HomepageSections} from '../data/data';
+import {SectionType} from '../data/dataDef';
 
 // eslint-disable-next-line react-memo/require-memo
 const Header = dynamic(() => import('../components/Sections/Header'), {ssr: false});
@@ -16,7 +17,7 @@ const Home: FC = memo(() => {
   const {title, description} = homePageMeta;
   return (
     <Page description={description} title={title}>
-      <Header />
+      <Header sections={HomepageSections as unknown as SectionType[]} navObserverOn={true}/>
       <Hero />
       <About />
       <Resume />

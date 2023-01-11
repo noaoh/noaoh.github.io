@@ -47,7 +47,7 @@ export const homePageMeta: HomepageMeta = {
 /**
  * Section definition
  */
-export const Sections = {
+export const HomepageSections = {
   Hero: {urlName: 'hero', displayName: 'hero', isOnNavBar: false, isOnHomepage: true},
   About: {urlName: 'about', displayName: 'about', isOnNavBar: true, isOnHomepage: true},
   Resume: {urlName: 'resume', displayName: 'resume', isOnNavBar: true, isOnHomepage: true},
@@ -62,6 +62,36 @@ export const Sections = {
   VinylCollection: {
     urlName: 'vinylCollection',
     displayName: 'Vinyl Collection',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  },
+} as const;
+
+export const CurrentlyListeningSections = {
+  Homepage: {
+    urlName: '', 
+    displayName: 'Home', 
+    isOnNavBar: true, 
+    isOnHomepage: false 
+  },
+  VinyCollection: {
+    urlName: 'vinylCollection',
+    displayName: 'Vinyl Collection',
+    isOnNavBar: true,
+    isOnHomepage: false
+  }
+} as const;
+
+export const VinylCollectionSections = {
+  Homepage: {
+    urlName: '',
+    displayName: 'Home',
+    isOnNavBar: true,
+    isOnHomepage: false 
+  },
+  CurrentlyListening: {
+    urlName: 'currentlyListening',
+    displayName: 'Currently Listening',
     isOnNavBar: true,
     isOnHomepage: false,
   },
@@ -94,7 +124,7 @@ export const heroData: Hero = {
       Icon: DownloadIcon,
     },
     {
-      href: `#${Sections.Contact.urlName}`,
+      href: `#${HomepageSections.Contact.urlName}`,
       text: 'Contact',
       primary: false,
     },

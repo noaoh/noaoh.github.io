@@ -1,8 +1,13 @@
 import fetch from 'cross-fetch';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import {FC, PropsWithChildren, useEffect, useState} from 'react';
 
+import { CurrentlyListeningSections } from '../data/data';
+import { SectionType } from '../data/dataDef';
 import {and} from '../utils';
+
+const Header = dynamic(() => import('../components/Sections/Header'), {ssr: false});
 
 interface CurrentlyListeningPayload {
   isPlaying: boolean;
@@ -91,6 +96,7 @@ const CurrentlyListening: FC = () => {
       <Head>
         <title>Currently Listening</title>
       </Head>
+      <Header sections={CurrentlyListeningSections as unknown as SectionType[]} navObserverOn={false}/>
       <div className="height: 50vh flex h-screen flex-col items-center justify-center">
         <h1 className="height: 100vh text-2xl font-bold text-white">What I'm Currently Listening to</h1>
         {currListening.isPlaying ? (

@@ -2,23 +2,30 @@ import {Dialog, Transition} from '@headlessui/react';
 import {MenuAlt3Icon} from '@heroicons/react/outline';
 import classNames from 'classnames';
 import Link from 'next/link';
-import {FC, Fragment, memo, useCallback, useMemo, useState} from 'react';
+import {FC, Fragment, memo, PropsWithChildren, useCallback, useMemo, useState} from 'react';
 
-import {Sections} from '../../data/data';
 import {SectionType} from '../../data/dataDef';
 import {useNavObserver} from '../../hooks/useNavObserver';
 
 export const headerID = 'headerNav';
 
-const Header: FC = memo(() => {
+interface HeaderProps {
+  sections: SectionType[];
+  navObserverOn: boolean;
+}
+
+const Header: FC<PropsWithChildren<HeaderProps>> = memo((props: HeaderProps) => {
+  const { sections, navObserverOn } = props;
   const [currentSection, setCurrentSection] = useState<SectionType | null>(null);
-  const navSections = useMemo(() => Object.values(Sections).filter(section => section.isOnNavBar), []);
+  const navSections = useMemo(() => Object.values(sections).filter(section => section.isOnNavBar), []);
 
-  const intersectionHandler = useCallback((section: SectionType | null) => {
-    section && setCurrentSection(section);
-  }, []);
+  if (navObserverOn) {
+    const intersectionHandler = useCallback((section: SectionType | null) => {
+      section && setCurrentSection(section);
+    }, []);
 
-  useNavObserver(navSections, intersectionHandler);
+    useNavObserver(navSections, intersectionHandler);
+  }
 
   return (
     <>

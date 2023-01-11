@@ -1,8 +1,14 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
 import {FC, PropsWithChildren, useEffect, useState} from 'react';
 
+import {VinylCollectionSections} from '../data/data';
+import {SectionType} from '../data/dataDef';
 import {and} from '../utils';
+
+// eslint-disable-next-line react-memo/require-memo
+const Header = dynamic(() => import('../components/Sections/Header'), {ssr: false});
 
 interface VinylItemProps {
   thumbnail: string;
@@ -50,25 +56,29 @@ const VinylCollection: FC = () => {
       <Head>
         <title>My Vinyl Collection</title>
       </Head>
+      <Header sections={VinylCollectionSections as unknown as SectionType[]} navObserverOn={false}/>
       <div>
         <strong>
           <h1>My Vinyl Collection</h1>
         </strong>
-        <ol>
-          {vinylCollection &&
-            vinylCollection.map((vinyl, i) => {
-              return (
-                <li key={i}>
-                  <VinylItem
-                    album={vinyl.album}
-                    artists={vinyl.artists}
-                    dateAdded={vinyl.dateAdded}
-                    thumbnail={vinyl.thumbnail}
-                  />
-                </li>
-              );
-            })}
-        </ol>
+          {vinylCollection.length === 0 ? (
+            <p>My vinyl collection is loading.</p>
+          ) : (
+            <ol>
+              {vinylCollection.map((vinyl, i) => {
+                  return (
+                    <li key={i}>
+                      <VinylItem
+                        album={vinyl.album}
+                        artists={vinyl.artists}
+                        dateAdded={vinyl.dateAdded}
+                        thumbnail={vinyl.thumbnail}
+                      />
+                    </li>
+                  );
+                })}
+            </ol>
+          )}
       </div>
     </>
   );

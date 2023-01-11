@@ -69,17 +69,17 @@ export const HomepageSections = {
 
 export const CurrentlyListeningSections = {
   Homepage: {
-    urlName: '', 
-    displayName: 'Home', 
-    isOnNavBar: true, 
-    isOnHomepage: false 
+    urlName: '',
+    displayName: 'Home',
+    isOnNavBar: true,
+    isOnHomepage: false,
   },
   VinyCollection: {
     urlName: 'vinylCollection',
     displayName: 'Vinyl Collection',
     isOnNavBar: true,
-    isOnHomepage: false
-  }
+    isOnHomepage: false,
+  },
 } as const;
 
 export const VinylCollectionSections = {
@@ -87,7 +87,7 @@ export const VinylCollectionSections = {
     urlName: '',
     displayName: 'Home',
     isOnNavBar: true,
-    isOnHomepage: false 
+    isOnHomepage: false,
   },
   CurrentlyListening: {
     urlName: 'currentlyListening',

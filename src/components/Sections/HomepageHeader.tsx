@@ -11,21 +11,18 @@ export const headerID = 'headerNav';
 
 interface HeaderProps {
   sections: SectionType[];
-  navObserverOn: boolean;
 }
 
 const Header: FC<PropsWithChildren<HeaderProps>> = memo((props: HeaderProps) => {
-  const { sections, navObserverOn } = props;
+  const {sections} = props;
   const [currentSection, setCurrentSection] = useState<SectionType | null>(null);
-  const navSections = useMemo(() => Object.values(sections).filter(section => section.isOnNavBar), []);
+  const navSections = useMemo(() => Object.values(sections).filter(section => section.isOnNavBar), [sections]);
 
-  if (navObserverOn) {
-    const intersectionHandler = useCallback((section: SectionType | null) => {
-      section && setCurrentSection(section);
-    }, []);
+  const intersectionHandler = useCallback((section: SectionType | null) => {
+    section && setCurrentSection(section);
+  }, []);
 
-    useNavObserver(navSections, intersectionHandler);
-  }
+  useNavObserver(navSections, intersectionHandler);
 
   return (
     <>

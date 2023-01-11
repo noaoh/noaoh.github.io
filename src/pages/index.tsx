@@ -11,13 +11,13 @@ import {homePageMeta, HomepageSections} from '../data/data';
 import {SectionType} from '../data/dataDef';
 
 // eslint-disable-next-line react-memo/require-memo
-const Header = dynamic(() => import('../components/Sections/Header'), {ssr: false});
+const HomepageHeader = dynamic(() => import('../components/Sections/HomepageHeader'), {ssr: false});
 
 const Home: FC = memo(() => {
   const {title, description} = homePageMeta;
   return (
     <Page description={description} title={title}>
-      <Header sections={HomepageSections as unknown as SectionType[]} navObserverOn={true}/>
+      <HomepageHeader sections={HomepageSections as unknown as SectionType[]} />
       <Hero />
       <About />
       <Resume />

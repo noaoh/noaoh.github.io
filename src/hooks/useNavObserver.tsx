@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 
-import {headerID} from '../components/Sections/Header';
+import {headerID} from '../components/Sections/HomepageHeader';
 import {HomepageSections} from '../data/data';
 import {SectionType} from '../data/dataDef';
 

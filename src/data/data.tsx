@@ -36,6 +36,8 @@ import {
   TimelineItem,
 } from './dataDef';
 
+const NODE_ENV = process?.env?.NODE_ENV;
+
 /**
  * Page meta data
  */
@@ -53,6 +55,13 @@ export const HomepageSections = {
   Resume: {urlName: 'resume', displayName: 'resume', isOnNavBar: true, isOnHomepage: true},
   Portfolio: {urlName: 'portfolio', displayName: 'portfolio', isOnNavBar: false, isOnHomepage: false},
   Contact: {urlName: 'contact', displayName: 'contact', isOnNavBar: true, isOnHomepage: true},
+  Blog: {
+    urlName: NODE_ENV && NODE_ENV === 'development' ? 'http://localhost:8000' : 'blog',
+    displayName: 'My Blog',
+    isOnNavBar: true,
+    isOnHomepage: false,
+    isOnGatsby: true,
+  },
   CurrentlyListening: {
     urlName: 'currentlyListening',
     displayName: 'Currently listening',
@@ -74,6 +83,13 @@ export const CurrentlyListeningSections = {
     isOnNavBar: true,
     isOnHomepage: false,
   },
+  Blog: {
+    urlName: NODE_ENV && NODE_ENV === 'development' ? 'http://localhost:8000' : 'blog',
+    displayName: 'My Blog',
+    isOnNavBar: true,
+    isOnHomepage: false,
+    isOnGatsby: true,
+  },
   VinyCollection: {
     urlName: 'vinylCollection',
     displayName: 'Vinyl Collection',
@@ -88,6 +104,13 @@ export const VinylCollectionSections = {
     displayName: 'Home',
     isOnNavBar: true,
     isOnHomepage: false,
+  },
+  Blog: {
+    urlName: NODE_ENV && NODE_ENV === 'development' ? 'http://localhost:8000' : 'blog',
+    displayName: 'My Blog',
+    isOnNavBar: true,
+    isOnHomepage: false,
+    isOnGatsby: true,
   },
   CurrentlyListening: {
     urlName: 'currentlyListening',

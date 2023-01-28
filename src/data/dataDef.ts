@@ -136,4 +136,5 @@ export interface SectionType {
   urlName: string;
   isOnHomepage: boolean;
   isOnNavBar: boolean;
+  isOnGatsby?: boolean;
 }

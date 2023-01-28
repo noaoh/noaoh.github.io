@@ -120,7 +120,11 @@ const NavItem: FC<{
   onClick?: () => void;
 }> = memo(({section, current, inactiveClass, activeClass, onClick}) => {
   return (
-    <Link href={section.isOnHomepage ? `/#${section.urlName}` : `/${section.urlName}`} passHref>
+    <Link
+      href={
+        section.isOnGatsby ? section.urlName : section.isOnHomepage ? `/#${section.urlName}` : `/${section.urlName}`
+      }
+      passHref>
       <a className={classNames(current ? activeClass : inactiveClass)} key={section.urlName} onClick={onClick}>
         {section.displayName}
       </a>

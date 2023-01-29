@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import {compareAsc, compareDesc} from 'date-fns';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -32,18 +33,23 @@ interface VinylItemProps {
 const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps) => {
   const formattedDate = new Date(props.dateAdded).toLocaleDateString();
   return (
-    <div>
-      <p>
+    <div className={classNames("relative p-4", "flex flex-wrap align-center")}>
+      <>
         <Image
           alt="Image didn't load"
-          className={props.needsBlur ? 'blur-sm' : undefined}
+          className={classNames(props.needsBlur ? 'blur-sm' : undefined, 'w-150 h-150 mr-4')}
           height="150"
           src={props.thumbnail}
           width="150"
         />{' '}
-        <strong>{props.album}</strong> by <strong>{and(props.artists, 'and')}</strong> added to my collection on{' '}
-        <strong>{formattedDate}</strong>
-      </p>
+        <p className="ml-2 text-5xl">
+          <strong>{props.artists.length === 1 ? 'Artist:' : 'Artists:'}</strong> {and(props.artists, 'and')}
+          <br/>
+          <strong>Album:</strong> {props.album}
+          <br/>
+          <strong>Date Added:</strong> {formattedDate}
+        </p>
+      </>
     </div>
   );
 };

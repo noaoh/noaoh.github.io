@@ -23,8 +23,15 @@ const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps)
   return (
     <div>
       <p>
-        <Image className={props.needsBlur ? 'blur-sm' : undefined} alt="Image didn't load" height="150" src={props.thumbnail} width="150" /> <strong>{props.album}</strong>{' '}
-        by <strong>{and(props.artists, 'and')}</strong> added to my collection on <strong>{formattedDate}</strong>
+        <Image
+          alt="Image didn't load"
+          className={props.needsBlur ? 'blur-sm' : undefined}
+          height="150"
+          src={props.thumbnail}
+          width="150"
+        />{' '}
+        <strong>{props.album}</strong> by <strong>{and(props.artists, 'and')}</strong> added to my collection on{' '}
+        <strong>{formattedDate}</strong>
       </p>
     </div>
   );
@@ -73,8 +80,8 @@ const VinylCollection: FC = () => {
                     album={vinyl.album}
                     artists={vinyl.artists}
                     dateAdded={vinyl.dateAdded}
-                    thumbnail={vinyl.thumbnail}
                     needsBlur={vinyl.needsBlur}
+                    thumbnail={vinyl.thumbnail}
                   />
                 </li>
               );

@@ -141,7 +141,7 @@ const VinylCollection: FC = () => {
           <>
             <br />
             <select
-              className="block appearance-none rounded border border-gray-400 bg-white py-2 px-4 leading-tight focus:outline-none"
+              className="block appearance-none rounded border border-gray-400 bg-white py-1 px-10 leading-tight focus:outline-none"
               onChange={handleSortOrderChange}
               value={sortOrder}>
               <option value={SortOrder.ASC}>Ascending</option>
@@ -149,7 +149,7 @@ const VinylCollection: FC = () => {
             </select>
             <br />
             <select
-              className="block appearance-none rounded border border-gray-400 bg-white py-2 px-4 leading-tight focus:outline-none"
+              className="block appearance-none rounded border border-gray-400 bg-white py-1 px-10 leading-tight focus:outline-none"
               onChange={handleSortTypeChange}
               value={sortType}>
               <option value={SortType.DATE}>Date</option>

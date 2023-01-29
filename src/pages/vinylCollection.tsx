@@ -37,7 +37,7 @@ const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps)
       <>
         <Image
           alt="Image didn't load"
-          className={classNames({ 'blur-sm' : props.needsBlur }, 'w-150 h-150 mr-4')}
+          className={classNames({'blur-sm': props.needsBlur}, 'w-150 h-150 mr-4')}
           height="150"
           src={props.thumbnail}
           width="150"

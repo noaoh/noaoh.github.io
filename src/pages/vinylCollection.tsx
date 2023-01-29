@@ -33,7 +33,7 @@ interface VinylItemProps {
 const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps) => {
   const formattedDate = new Date(props.dateAdded).toLocaleDateString();
   return (
-    <div className={classNames("relative p-4", "flex flex-wrap align-center")}>
+    <div className={classNames('relative p-4', 'align-center flex flex-wrap')}>
       <>
         <Image
           alt="Image didn't load"
@@ -44,9 +44,9 @@ const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps)
         />{' '}
         <p className="ml-2 text-5xl">
           <strong>{props.artists.length === 1 ? 'Artist:' : 'Artists:'}</strong> {and(props.artists, 'and')}
-          <br/>
+          <br />
           <strong>Album:</strong> {props.album}
-          <br/>
+          <br />
           <strong>Date Added:</strong> {formattedDate}
         </p>
       </>

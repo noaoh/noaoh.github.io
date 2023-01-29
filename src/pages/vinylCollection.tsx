@@ -141,12 +141,18 @@ const VinylCollection: FC = () => {
         ) : (
           <>
             <br />
-            <select onChange={handleSortOrderChange} value={sortOrder}>
+            <select
+              className="block appearance-none rounded border border-gray-400 bg-white py-2 px-4 leading-tight focus:outline-none"
+              onChange={handleSortOrderChange}
+              value={sortOrder}>
               <option value={SortOrder.ASC}>Ascending</option>
               <option value={SortOrder.DESC}>Descending</option>
             </select>
             <br />
-            <select onChange={handleSortTypeChange} value={sortType}>
+            <select
+              className="block appearance-none rounded border border-gray-400 bg-white py-2 px-4 leading-tight focus:outline-none"
+              onChange={handleSortTypeChange}
+              value={sortType}>
               <option value={SortType.DATE}>Date</option>
               <option value={SortType.NAME}>Name</option>
             </select>

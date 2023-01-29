@@ -75,18 +75,16 @@ const VinylCollection: FC = () => {
 
   const handleSortOrderChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(event.target.value);
-    handleSort();
   };
 
   const handleSortTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSortType(event.target.value);
-    handleSort();
   };
 
-  const handleSort = () => {
+  const performSort = (vinylCollection: VinylItemProps[], sortType: string, sortOrder: string) => {
     const newArr =
       sortType === SortType.DATE ? sortByDate(vinylCollection, sortOrder) : sortByName(vinylCollection, sortOrder);
-    setVinylCollection(newArr);
+    return newArr;
   };
 
   const sortByName = (items: VinylItemProps[], order: string): VinylItemProps[] => {
@@ -94,10 +92,10 @@ const VinylCollection: FC = () => {
       return [];
     }
 
-    return items.sort((a: VinylItemProps, b: VinylItemProps): number => {
+    return [...items].sort((a: VinylItemProps, b: VinylItemProps): number => {
       const artistsA = and(a.artists, 'and');
       const artistsB = and(b.artists, 'and');
-      if (order === SortOrder.ASC) {
+      if (order === SortOrder.DESC) {
         const compareArtists = artistsA.localeCompare(artistsB);
         return compareArtists === 0 ? a.album.localeCompare(b.album) : compareArtists;
       } else {
@@ -112,7 +110,7 @@ const VinylCollection: FC = () => {
       return [];
     }
 
-    return items.sort((a: VinylItemProps, b: VinylItemProps): number => {
+    return [...items].sort((a: VinylItemProps, b: VinylItemProps): number => {
       const {dateAdded: dateAddedStringA} = a;
       const {dateAdded: dateAddedStringB} = b;
       const dateAddedA = new Date(dateAddedStringA);
@@ -128,6 +126,7 @@ const VinylCollection: FC = () => {
       </Head>
       <OtherHeader sections={VinylCollectionSections as unknown as SectionType[]} />
       <div>
+        <br />
         <strong>
           <h1>My Vinyl Collection</h1>
         </strong>
@@ -147,7 +146,7 @@ const VinylCollection: FC = () => {
             </select>
             <br />
             <ol>
-              {vinylCollection.map((vinyl, i) => {
+              {performSort(vinylCollection, sortType, sortOrder).map((vinyl, i) => {
                 return (
                   <li key={i}>
                     <VinylItem

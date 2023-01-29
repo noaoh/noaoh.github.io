@@ -35,6 +35,7 @@ import {
   Social,
   TimelineItem,
 } from './dataDef';
+import { gatsbyLinkCreator } from '../utils';
 
 const NODE_ENV = process?.env?.NODE_ENV;
 
@@ -56,7 +57,7 @@ export const HomepageSections = {
   Portfolio: {urlName: 'portfolio', displayName: 'portfolio', isOnNavBar: false, isOnHomepage: false},
   Contact: {urlName: 'contact', displayName: 'contact', isOnNavBar: true, isOnHomepage: true},
   Blog: {
-    urlName: NODE_ENV && NODE_ENV === 'development' ? 'http://localhost:8000' : 'blog',
+    urlName: gatsbyLinkCreator(NODE_ENV),
     displayName: 'My Blog',
     isOnNavBar: true,
     isOnHomepage: false,
@@ -84,7 +85,7 @@ export const CurrentlyListeningSections = {
     isOnHomepage: false,
   },
   Blog: {
-    urlName: NODE_ENV && NODE_ENV === 'development' ? 'http://localhost:8000' : 'blog',
+    urlName: gatsbyLinkCreator(NODE_ENV),
     displayName: 'My Blog',
     isOnNavBar: true,
     isOnHomepage: false,
@@ -106,7 +107,7 @@ export const VinylCollectionSections = {
     isOnHomepage: false,
   },
   Blog: {
-    urlName: NODE_ENV && NODE_ENV === 'development' ? 'http://localhost:8000' : 'blog',
+    urlName: gatsbyLinkCreator(NODE_ENV),
     displayName: 'My Blog',
     isOnNavBar: true,
     isOnHomepage: false,
@@ -135,7 +136,7 @@ export const heroData: Hero = {
       </p>
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
         In my free time time, you can catch me running, playing video games, hiking, reading, or coding up a new
-        project!
+        project!  I also have a <a className="hover:text-bright-red" href={gatsbyLinkCreator(NODE_ENV)}>blog</a>.
       </p>
     </>
   ),
@@ -400,12 +401,13 @@ export const contact: ContactSection = {
   items: [
     {
       type: ContactType.Email,
-      text: 'noahyranholt@gmail.com',
+      text: 'noahryanholt@gmail.com',
       href: 'mailto:noahryanholt@gmail.com',
     },
     {
       type: ContactType.Location,
       text: 'Bentonville, AR',
+      href: 'https://www.openstreetmap.org/#map=12/36.3549/-94.2404',
     },
     {
       type: ContactType.Github,

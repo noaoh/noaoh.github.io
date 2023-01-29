@@ -28,6 +28,9 @@ module.exports = {
       screens: {
         touch: {raw: 'only screen and (pointer: coarse)'},
       },
+      colors: {
+        'bright-red': '#FE0103'
+      }
     },
   },
   // eslint-disable-next-line no-undef

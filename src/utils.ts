@@ -1,11 +1,13 @@
 // Adapted from https://github.com/rasshofer/and
-export const and = (data: Array<string>, separator = '&', oxfordComma = false) => {
-  const items = data.length;
-  const lastItem = data.pop();
-  if (data.length) {
-    return `${data.join(', ')}${oxfordComma && items > 2 ? ',' : ''} ${separator} ${lastItem}`.trim();
+export const and = (data: Array<string>, separator = '&', oxfordComma = false): string => {
+  const length = data.length;
+  if (length === 1) {
+    return data[0];
   } else {
-    return lastItem;
+    const allButLast = data.slice(0, -1);
+    return `${allButLast.join(', ')}${oxfordComma && length - 1 > 2 ? ',' : ''} ${separator} ${
+      data[length - 1]
+    }`.trim();
   }
 };
 

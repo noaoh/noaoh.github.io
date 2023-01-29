@@ -1,7 +1,8 @@
+import {compareAsc, compareDesc} from 'date-fns';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
-import {FC, PropsWithChildren, useEffect, useState} from 'react';
+import React, {ChangeEvent, FC, PropsWithChildren, useEffect, useState} from 'react';
 
 import {VinylCollectionSections} from '../data/data';
 import {SectionType} from '../data/dataDef';
@@ -9,6 +10,16 @@ import {and} from '../utils';
 
 // eslint-disable-next-line react-memo/require-memo
 const OtherHeader = dynamic(() => import('../components/Sections/OtherHeader'), {ssr: false});
+
+const SortOrder = {
+  ASC: 'ASC',
+  DESC: 'DESC',
+};
+
+const SortType = {
+  DATE: 'DATE',
+  NAME: 'NAME',
+};
 
 interface VinylItemProps {
   thumbnail: string;
@@ -38,6 +49,8 @@ const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps)
 };
 
 const VinylCollection: FC = () => {
+  const [sortOrder, setSortOrder] = useState(SortOrder.ASC);
+  const [sortType, setSortType] = useState(SortType.NAME);
   const [vinylCollection, setVinylCollection] = useState<VinylItemProps[]>([]);
 
   const getVinylCollection = async () => {
@@ -48,8 +61,9 @@ const VinylCollection: FC = () => {
 
     try {
       const resp = await fetch(url, options);
-      const j: VinylItemProps[] = await resp.json();
-      setVinylCollection(j);
+      const unsorted: VinylItemProps[] = await resp.json();
+      const sorted: VinylItemProps[] = sortByName(unsorted, sortOrder);
+      setVinylCollection(sorted);
     } catch (err) {
       console.log(err);
     }
@@ -58,6 +72,54 @@ const VinylCollection: FC = () => {
   useEffect(() => {
     getVinylCollection();
   }, []);
+
+  const handleSortOrderChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setSortOrder(event.target.value);
+    handleSort();
+  };
+
+  const handleSortTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setSortType(event.target.value);
+    handleSort();
+  };
+
+  const handleSort = () => {
+    const newArr =
+      sortType === SortType.DATE ? sortByDate(vinylCollection, sortOrder) : sortByName(vinylCollection, sortOrder);
+    setVinylCollection(newArr);
+  };
+
+  const sortByName = (items: VinylItemProps[], order: string): VinylItemProps[] => {
+    if (!items || items.length === 0) {
+      return [];
+    }
+
+    return items.sort((a: VinylItemProps, b: VinylItemProps): number => {
+      const artistsA = and(a.artists, 'and');
+      const artistsB = and(b.artists, 'and');
+      if (order === SortOrder.ASC) {
+        const compareArtists = artistsA.localeCompare(artistsB);
+        return compareArtists === 0 ? a.album.localeCompare(b.album) : compareArtists;
+      } else {
+        const compareArtists = artistsB.localeCompare(artistsA);
+        return compareArtists === 0 ? b.album.localeCompare(a.album) : compareArtists;
+      }
+    });
+  };
+
+  const sortByDate = (items: VinylItemProps[], order: string): VinylItemProps[] => {
+    if (!items || items.length === 0) {
+      return [];
+    }
+
+    return items.sort((a: VinylItemProps, b: VinylItemProps): number => {
+      const {dateAdded: dateAddedStringA} = a;
+      const {dateAdded: dateAddedStringB} = b;
+      const dateAddedA = new Date(dateAddedStringA);
+      const dateAddedB = new Date(dateAddedStringB);
+      return order === SortOrder.ASC ? compareAsc(dateAddedA, dateAddedB) : compareDesc(dateAddedA, dateAddedB);
+    });
+  };
 
   return (
     <>
@@ -72,21 +134,34 @@ const VinylCollection: FC = () => {
         {vinylCollection.length === 0 ? (
           <p>My vinyl collection is loading.</p>
         ) : (
-          <ol>
-            {vinylCollection.map((vinyl, i) => {
-              return (
-                <li key={i}>
-                  <VinylItem
-                    album={vinyl.album}
-                    artists={vinyl.artists}
-                    dateAdded={vinyl.dateAdded}
-                    needsBlur={vinyl.needsBlur}
-                    thumbnail={vinyl.thumbnail}
-                  />
-                </li>
-              );
-            })}
-          </ol>
+          <>
+            <br />
+            <select onChange={handleSortOrderChange} value={sortOrder}>
+              <option value={SortOrder.ASC}>Ascending</option>
+              <option value={SortOrder.DESC}>Descending</option>
+            </select>
+            <br />
+            <select onChange={handleSortTypeChange} value={sortType}>
+              <option value={SortType.DATE}>Date</option>
+              <option value={SortType.NAME}>Name</option>
+            </select>
+            <br />
+            <ol>
+              {vinylCollection.map((vinyl, i) => {
+                return (
+                  <li key={i}>
+                    <VinylItem
+                      album={vinyl.album}
+                      artists={vinyl.artists}
+                      dateAdded={vinyl.dateAdded}
+                      needsBlur={vinyl.needsBlur}
+                      thumbnail={vinyl.thumbnail}
+                    />
+                  </li>
+                );
+              })}
+            </ol>
+          </>
         )}
       </div>
     </>

@@ -15,6 +15,7 @@ interface VinylItemProps {
   dateAdded: string;
   album: string;
   artists: string[];
+  needsBlur: boolean;
 }
 
 const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps) => {
@@ -22,7 +23,7 @@ const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps)
   return (
     <div>
       <p>
-        <Image alt="Image didn't load" height="200" src={props.thumbnail} width="200" /> <strong>{props.album}</strong>{' '}
+        <Image className={props.needsBlur ? 'blur-sm' : undefined} alt="Image didn't load" height="150" src={props.thumbnail} width="150" /> <strong>{props.album}</strong>{' '}
         by <strong>{and(props.artists, 'and')}</strong> added to my collection on <strong>{formattedDate}</strong>
       </p>
     </div>
@@ -73,6 +74,7 @@ const VinylCollection: FC = () => {
                     artists={vinyl.artists}
                     dateAdded={vinyl.dateAdded}
                     thumbnail={vinyl.thumbnail}
+                    needsBlur={vinyl.needsBlur}
                   />
                 </li>
               );

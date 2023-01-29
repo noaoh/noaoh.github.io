@@ -67,9 +67,8 @@ const VinylCollection: FC = () => {
 
     try {
       const resp = await fetch(url, options);
-      const unsorted: VinylItemProps[] = await resp.json();
-      const sorted: VinylItemProps[] = sortByName(unsorted, sortOrder);
-      setVinylCollection(sorted);
+      const vinylItems: VinylItemProps[] = await resp.json();
+      setVinylCollection(vinylItems);
     } catch (err) {
       console.log(err);
     }

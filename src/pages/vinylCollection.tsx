@@ -37,12 +37,12 @@ const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps)
       <>
         <Image
           alt="Image didn't load"
-          className={classNames(props.needsBlur ? 'blur-sm' : undefined, 'w-150 h-150 mr-4')}
+          className={classNames({ 'blur-sm' : props.needsBlur }, 'w-150 h-150 mr-4')}
           height="150"
           src={props.thumbnail}
           width="150"
         />{' '}
-        <p className="ml-2 text-5xl">
+        <p className="ml-2 text-5xl text-white">
           <strong>{props.artists.length === 1 ? 'Artist:' : 'Artists:'}</strong> {and(props.artists, 'and')}
           <br />
           <strong>Album:</strong> {props.album}
@@ -87,7 +87,7 @@ const VinylCollection: FC = () => {
     setSortType(event.target.value);
   };
 
-  const performSort = (vinylCollection: VinylItemProps[], sortType: string, sortOrder: string) => {
+  const orderCollection = (vinylCollection: VinylItemProps[], sortType: string, sortOrder: string) => {
     const newArr =
       sortType === SortType.DATE ? sortByDate(vinylCollection, sortOrder) : sortByName(vinylCollection, sortOrder);
     return newArr;
@@ -152,7 +152,7 @@ const VinylCollection: FC = () => {
             </select>
             <br />
             <ol>
-              {performSort(vinylCollection, sortType, sortOrder).map((vinyl, i) => {
+              {orderCollection(vinylCollection, sortType, sortOrder).map((vinyl, i) => {
                 return (
                   <li key={i}>
                     <VinylItem

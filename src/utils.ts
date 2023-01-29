@@ -11,4 +11,4 @@ export const and = (data: Array<string>, separator = '&', oxfordComma = false) =
 
 export const gatsbyLinkCreator = (NODE_ENV: string) => {
   return NODE_ENV && NODE_ENV === 'development' ? 'http://localhost:8000' : '/blog';
-}
+};

@@ -21,6 +21,41 @@ const SortType = {
   DATE: 'DATE',
   NAME: 'NAME',
 };
+const sortByName = (items: VinylItemProps[], order: string): VinylItemProps[] => {
+  if (!items || items.length === 0) {
+    return [];
+  }
+
+  return [...items].sort((a: VinylItemProps, b: VinylItemProps): number => {
+    const artistsA = and(a.artists, 'and');
+    const artistsB = and(b.artists, 'and');
+    if (order === SortOrder.DESC) {
+      const compareArtists = artistsA.localeCompare(artistsB);
+      return compareArtists === 0 ? a.album.localeCompare(b.album) : compareArtists;
+    } else {
+      const compareArtists = artistsB.localeCompare(artistsA);
+      return compareArtists === 0 ? b.album.localeCompare(a.album) : compareArtists;
+    }
+  });
+};
+
+const sortByDate = (items: VinylItemProps[], order: string): VinylItemProps[] => {
+  if (!items || items.length === 0) {
+    return [];
+  }
+
+  return [...items].sort((a: VinylItemProps, b: VinylItemProps): number => {
+    const {dateAdded: dateAddedStringA} = a;
+    const {dateAdded: dateAddedStringB} = b;
+    const dateAddedA = new Date(dateAddedStringA);
+    const dateAddedB = new Date(dateAddedStringB);
+    return order === SortOrder.ASC ? compareAsc(dateAddedA, dateAddedB) : compareDesc(dateAddedA, dateAddedB);
+  });
+};
+
+const orderCollection = (vinylCollection: VinylItemProps[], sortType: string, sortOrder: string) => {
+  return sortType === SortType.DATE ? sortByDate(vinylCollection, sortOrder) : sortByName(vinylCollection, sortOrder);
+};
 
 interface VinylItemProps {
   thumbnail: string;
@@ -28,6 +63,10 @@ interface VinylItemProps {
   album: string;
   artists: string[];
   needsBlur: boolean;
+}
+
+interface VinylCollectionProps {
+  vinylCollection: VinylItemProps[];
 }
 
 const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps) => {
@@ -54,7 +93,27 @@ const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps)
   );
 };
 
-const VinylCollection: FC = () => {
+const VinylCollection: FC<PropsWithChildren<VinylCollectionProps>> = props => {
+  return (
+    <ol>
+      {props.vinylCollection.map((vinyl, i) => {
+        return (
+          <li key={i}>
+            <VinylItem
+              album={vinyl.album}
+              artists={vinyl.artists}
+              dateAdded={vinyl.dateAdded}
+              needsBlur={vinyl.needsBlur}
+              thumbnail={vinyl.thumbnail}
+            />
+          </li>
+        );
+      })}
+    </ol>
+  );
+};
+
+const VinylCollectionPage: FC = () => {
   const [sortOrder, setSortOrder] = useState(SortOrder.ASC);
   const [sortType, setSortType] = useState(SortType.NAME);
   const [vinylCollection, setVinylCollection] = useState<VinylItemProps[]>([]);
@@ -84,44 +143,6 @@ const VinylCollection: FC = () => {
 
   const handleSortTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSortType(event.target.value);
-  };
-
-  const orderCollection = (vinylCollection: VinylItemProps[], sortType: string, sortOrder: string) => {
-    const newArr =
-      sortType === SortType.DATE ? sortByDate(vinylCollection, sortOrder) : sortByName(vinylCollection, sortOrder);
-    return newArr;
-  };
-
-  const sortByName = (items: VinylItemProps[], order: string): VinylItemProps[] => {
-    if (!items || items.length === 0) {
-      return [];
-    }
-
-    return [...items].sort((a: VinylItemProps, b: VinylItemProps): number => {
-      const artistsA = and(a.artists, 'and');
-      const artistsB = and(b.artists, 'and');
-      if (order === SortOrder.DESC) {
-        const compareArtists = artistsA.localeCompare(artistsB);
-        return compareArtists === 0 ? a.album.localeCompare(b.album) : compareArtists;
-      } else {
-        const compareArtists = artistsB.localeCompare(artistsA);
-        return compareArtists === 0 ? b.album.localeCompare(a.album) : compareArtists;
-      }
-    });
-  };
-
-  const sortByDate = (items: VinylItemProps[], order: string): VinylItemProps[] => {
-    if (!items || items.length === 0) {
-      return [];
-    }
-
-    return [...items].sort((a: VinylItemProps, b: VinylItemProps): number => {
-      const {dateAdded: dateAddedStringA} = a;
-      const {dateAdded: dateAddedStringB} = b;
-      const dateAddedA = new Date(dateAddedStringA);
-      const dateAddedB = new Date(dateAddedStringB);
-      return order === SortOrder.ASC ? compareAsc(dateAddedA, dateAddedB) : compareDesc(dateAddedA, dateAddedB);
-    });
   };
 
   return (
@@ -156,21 +177,7 @@ const VinylCollection: FC = () => {
               <option value={SortType.NAME}>Name</option>
             </select>
             <br />
-            <ol>
-              {orderCollection(vinylCollection, sortType, sortOrder).map((vinyl, i) => {
-                return (
-                  <li key={i}>
-                    <VinylItem
-                      album={vinyl.album}
-                      artists={vinyl.artists}
-                      dateAdded={vinyl.dateAdded}
-                      needsBlur={vinyl.needsBlur}
-                      thumbnail={vinyl.thumbnail}
-                    />
-                  </li>
-                );
-              })}
-            </ol>
+            <VinylCollection vinylCollection={orderCollection(vinylCollection, sortType, sortOrder)} />
           </>
         )}
       </div>
@@ -178,4 +185,4 @@ const VinylCollection: FC = () => {
   );
 };
 
-export default VinylCollection;
+export default VinylCollectionPage;

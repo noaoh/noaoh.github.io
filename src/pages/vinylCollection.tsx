@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import React, {ChangeEvent, FC, PropsWithChildren, useEffect, useState} from 'react';
 
+import {Select, SelectProps} from '../components/Select';
 import {VinylCollectionSections} from '../data/data';
 import {SectionType} from '../data/dataDef';
 import {and} from '../utils';
@@ -145,6 +146,22 @@ const VinylCollectionPage: FC = () => {
     setSortType(event.target.value);
   };
 
+  const sortOrderProps: Omit<SelectProps, 'value'> = {
+    handleChange: handleSortOrderChange,
+    options: [
+      {label: 'Ascending', value: 'ASC'},
+      {label: 'Descending', value: 'DESC'},
+    ],
+  };
+
+  const sortTypeProps: Omit<SelectProps, 'value'> = {
+    handleChange: handleSortTypeChange,
+    options: [
+      {label: 'Name', value: 'NAME'},
+      {label: 'Date Added', value: 'DATE'},
+    ],
+  };
+
   return (
     <>
       <Head>
@@ -161,21 +178,9 @@ const VinylCollectionPage: FC = () => {
         ) : (
           <>
             <br />
-            <select
-              className="block appearance-none rounded border border-gray-400 bg-white py-1 px-10 leading-tight focus:outline-none"
-              onChange={handleSortOrderChange}
-              value={sortOrder}>
-              <option value={SortOrder.ASC}>Ascending</option>
-              <option value={SortOrder.DESC}>Descending</option>
-            </select>
+            <Select handleChange={sortOrderProps.handleChange} options={sortOrderProps.options} value={sortOrder} />
             <br />
-            <select
-              className="block appearance-none rounded border border-gray-400 bg-white py-1 px-10 leading-tight focus:outline-none"
-              onChange={handleSortTypeChange}
-              value={sortType}>
-              <option value={SortType.DATE}>Date</option>
-              <option value={SortType.NAME}>Name</option>
-            </select>
+            <Select handleChange={sortTypeProps.handleChange} options={sortTypeProps.options} value={sortType} />
             <br />
             <VinylCollection vinylCollection={orderCollection(vinylCollection, sortType, sortOrder)} />
           </>

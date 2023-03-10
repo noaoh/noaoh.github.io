@@ -3,7 +3,8 @@ import {compareAsc, compareDesc} from 'date-fns';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
-import React, {ChangeEvent, FC, PropsWithChildren, useEffect, useState} from 'react';
+import React, {ChangeEvent, FC, PropsWithChildren, useEffect, useMemo, useState} from 'react';
+import Fuse from 'fuse.js';
 
 import {Select, SelectProps} from '../components/Select';
 import {VinylCollectionSections} from '../data/data';
@@ -22,6 +23,7 @@ const SortType = {
   DATE: 'DATE',
   NAME: 'NAME',
 };
+
 const sortByName = (items: VinylItemProps[], order: string): VinylItemProps[] => {
   if (!items || items.length === 0) {
     return [];
@@ -68,6 +70,8 @@ interface VinylItemProps {
 
 interface VinylCollectionProps {
   vinylCollection: VinylItemProps[];
+  noSearchResults: boolean;
+  searchTerm: string;
 }
 
 const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps) => {
@@ -94,30 +98,51 @@ const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps)
   );
 };
 
-const VinylCollection: FC<PropsWithChildren<VinylCollectionProps>> = props => {
-  return (
-    <ol>
-      {props.vinylCollection.map((vinyl, i) => {
-        return (
-          <li key={i}>
-            <VinylItem
-              album={vinyl.album}
-              artists={vinyl.artists}
-              dateAdded={vinyl.dateAdded}
-              needsBlur={vinyl.needsBlur}
-              thumbnail={vinyl.thumbnail}
-            />
-          </li>
-        );
-      })}
-    </ol>
-  );
+const VinylCollection: FC<PropsWithChildren<VinylCollectionProps>> = (props) => {
+  if (props.vinylCollection.length === 0 && !props.noSearchResults) {
+    return <p>My vinyl collection is loading.</p>
+  } else if (props.vinylCollection.length !== 0) {
+    return (
+      <ol>
+        {props.vinylCollection.map((vinyl, i) => {
+          return (
+            <li key={i}>
+              <VinylItem
+                album={vinyl.album}
+                artists={vinyl.artists}
+                dateAdded={vinyl.dateAdded}
+                needsBlur={vinyl.needsBlur}
+                thumbnail={vinyl.thumbnail}
+              />
+            </li>
+          );
+        })}
+      </ol>
+    );
+  } else {
+    return <p>There are no results for the search '{props.searchTerm}'.  Try backspacing or searching for another search term.</p>
+  }
 };
+
+const processFuseSearchResults = (searchResults: any)  => {
+    return [...searchResults].sort((a, b) => a.refIndex - b.refIndex).map((i) => i.item);
+}
+
+const fuse = new Fuse([], {
+  threshold: 0.2,
+  keys: [
+      "album",
+      "artists"
+  ],
+})
 
 const VinylCollectionPage: FC = () => {
   const [sortOrder, setSortOrder] = useState(SortOrder.ASC);
   const [sortType, setSortType] = useState(SortType.NAME);
   const [vinylCollection, setVinylCollection] = useState<VinylItemProps[]>([]);
+  const [originalVinylCollection, setOriginalVinylCollection] = useState<VinylItemProps[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const noSearchResults = useMemo(() => originalVinylCollection.length !== 0, [originalVinylCollection]);
 
   const getVinylCollection = async () => {
     const url = 'https://ch9mysodje.execute-api.us-east-1.amazonaws.com/vinyl-collection';
@@ -128,7 +153,10 @@ const VinylCollectionPage: FC = () => {
     try {
       const resp = await fetch(url, options);
       const vinylItems: VinylItemProps[] = await resp.json();
-      setVinylCollection(vinylItems);
+      const sortedVinylItems = orderCollection(vinylItems, sortType, sortOrder);
+      setVinylCollection(sortedVinylItems);
+      setOriginalVinylCollection(sortedVinylItems);
+      fuse.setCollection(originalVinylCollection as unknown as never[]);
     } catch (err) {
       console.log(err);
     }
@@ -138,12 +166,32 @@ const VinylCollectionPage: FC = () => {
     getVinylCollection();
   }, []);
 
+  const fuseSearch = (vinylCollection: VinylItemProps[], searchTerm: string) => {
+    if (searchTerm === '') {
+      return vinylCollection;
+    } else {
+      fuse.setCollection(vinylCollection as unknown as never[]);
+      const searchResults = processFuseSearchResults(fuse.search(searchTerm));
+      if (searchResults.length === 0) {
+        fuse.setCollection(originalVinylCollection as unknown as never[]);
+        return searchResults;
+      } else {
+        fuse.setCollection(searchResults as unknown as never[]);
+        return searchResults;
+      }
+    }
+  }
+
   const handleSortOrderChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(event.target.value);
   };
 
   const handleSortTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSortType(event.target.value);
+  };
+
+  const handleSearchTermChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
   };
 
   const sortOrderProps: Omit<SelectProps, 'value'> = {
@@ -168,24 +216,15 @@ const VinylCollectionPage: FC = () => {
         <title>My Vinyl Collection</title>
       </Head>
       <OtherHeader sections={VinylCollectionSections as unknown as SectionType[]} />
-      <div>
-        <br />
-        <strong>
-          <h1>My Vinyl Collection</h1>
-        </strong>
-        {vinylCollection.length === 0 ? (
-          <p>My vinyl collection is loading.</p>
-        ) : (
-          <>
-            <br />
-            <Select handleChange={sortOrderProps.handleChange} options={sortOrderProps.options} value={sortOrder} />
-            <br />
-            <Select handleChange={sortTypeProps.handleChange} options={sortTypeProps.options} value={sortType} />
-            <br />
-            <VinylCollection vinylCollection={orderCollection(vinylCollection, sortType, sortOrder)} />
-          </>
-        )}
-      </div>
+      <br />
+      <br />
+      <br />
+      <Select handleChange={sortOrderProps.handleChange} options={sortOrderProps.options} value={sortOrder} />
+      <br />
+      <Select handleChange={sortTypeProps.handleChange} options={sortTypeProps.options} value={sortType} />
+      <br />
+      <input type="text" onChange={handleSearchTermChange} placeholder='Search my vinyl collection!' />
+      <VinylCollection searchTerm={searchTerm} noSearchResults={noSearchResults} vinylCollection={orderCollection(fuseSearch(vinylCollection, searchTerm), sortType, sortOrder)} />
     </>
   );
 };

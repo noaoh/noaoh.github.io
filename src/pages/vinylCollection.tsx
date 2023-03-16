@@ -30,14 +30,14 @@ const sortByName = (items: VinylItemProps[], order: string): VinylItemProps[] =>
   }
 
   return [...items].sort((a: VinylItemProps, b: VinylItemProps): number => {
-    const artistsA = and(a.artists, 'and');
-    const artistsB = and(b.artists, 'and');
+    const artistsA = and(a.item.artists, 'and');
+    const artistsB = and(b.item.artists, 'and');
     if (order === SortOrder.DESC) {
       const compareArtists = artistsA.localeCompare(artistsB);
-      return compareArtists === 0 ? a.album.localeCompare(b.album) : compareArtists;
+      return compareArtists === 0 ? a.item.album.localeCompare(b.item.album) : compareArtists;
     } else {
       const compareArtists = artistsB.localeCompare(artistsA);
-      return compareArtists === 0 ? b.album.localeCompare(a.album) : compareArtists;
+      return compareArtists === 0 ? b.item.album.localeCompare(a.item.album) : compareArtists;
     }
   });
 };
@@ -48,8 +48,8 @@ const sortByDate = (items: VinylItemProps[], order: string): VinylItemProps[] =>
   }
 
   return [...items].sort((a: VinylItemProps, b: VinylItemProps): number => {
-    const {dateAdded: dateAddedStringA} = a;
-    const {dateAdded: dateAddedStringB} = b;
+    const {dateAdded: dateAddedStringA} = a.item;
+    const {dateAdded: dateAddedStringB} = b.item;
     const dateAddedA = new Date(dateAddedStringA);
     const dateAddedB = new Date(dateAddedStringB);
     return order === SortOrder.ASC ? compareAsc(dateAddedA, dateAddedB) : compareDesc(dateAddedA, dateAddedB);
@@ -60,12 +60,17 @@ const orderCollection = (vinylCollection: VinylItemProps[], sortType: string, so
   return sortType === SortType.DATE ? sortByDate(vinylCollection, sortOrder) : sortByName(vinylCollection, sortOrder);
 };
 
-interface VinylItemProps {
+interface VinylItem {
   thumbnail: string;
   dateAdded: string;
   album: string;
   artists: string[];
   needsBlur: boolean;
+}
+
+interface VinylItemProps {
+  id: string;
+  item: VinylItem
 }
 
 interface VinylCollectionProps {
@@ -74,7 +79,7 @@ interface VinylCollectionProps {
   searchTerm: string;
 }
 
-const VinylItem: FC<PropsWithChildren<VinylItemProps>> = (props: VinylItemProps) => {
+const VinylItemElement: FC<PropsWithChildren<VinylItem>> = (props: VinylItem) => {
   const formattedDate = new Date(props.dateAdded).toLocaleDateString();
   return (
     <div className={classNames('relative p-4', 'align-center flex flex-wrap')}>
@@ -104,15 +109,15 @@ const VinylCollection: FC<PropsWithChildren<VinylCollectionProps>> = (props) => 
   } else if (props.vinylCollection.length !== 0) {
     return (
       <ol>
-        {props.vinylCollection.map((vinyl, i) => {
+        {props.vinylCollection.map(({item, id}) => {
           return (
-            <li key={i}>
-              <VinylItem
-                album={vinyl.album}
-                artists={vinyl.artists}
-                dateAdded={vinyl.dateAdded}
-                needsBlur={vinyl.needsBlur}
-                thumbnail={vinyl.thumbnail}
+            <li key={id}>
+              <VinylItemElement
+                album={item.album}
+                artists={item.artists}
+                dateAdded={item.dateAdded}
+                needsBlur={item.needsBlur}
+                thumbnail={item.thumbnail}
               />
             </li>
           );
@@ -131,8 +136,8 @@ const processFuseSearchResults = (searchResults: any)  => {
 const fuse = new Fuse([], {
   threshold: 0.2,
   keys: [
-      "album",
-      "artists"
+      "item.album",
+      "item.artists"
   ],
 })
 

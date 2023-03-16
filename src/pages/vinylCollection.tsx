@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import {compareAsc, compareDesc} from 'date-fns';
+import Fuse from 'fuse.js';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
 import React, {ChangeEvent, FC, PropsWithChildren, useEffect, useMemo, useState} from 'react';
-import Fuse from 'fuse.js';
 
 import {Select, SelectProps} from '../components/Select';
 import {VinylCollectionSections} from '../data/data';
@@ -70,7 +70,7 @@ interface VinylItem {
 
 interface VinylItemProps {
   id: string;
-  item: VinylItem
+  item: VinylItem;
 }
 
 interface VinylCollectionProps {
@@ -103,9 +103,9 @@ const VinylItemElement: FC<PropsWithChildren<VinylItem>> = (props: VinylItem) =>
   );
 };
 
-const VinylCollection: FC<PropsWithChildren<VinylCollectionProps>> = (props) => {
+const VinylCollection: FC<PropsWithChildren<VinylCollectionProps>> = props => {
   if (props.vinylCollection.length === 0 && !props.noSearchResults) {
-    return <p>My vinyl collection is loading.</p>
+    return <p>My vinyl collection is loading.</p>;
   } else if (props.vinylCollection.length !== 0) {
     return (
       <ol>
@@ -125,21 +125,22 @@ const VinylCollection: FC<PropsWithChildren<VinylCollectionProps>> = (props) => 
       </ol>
     );
   } else {
-    return <p>There are no results for the search '{props.searchTerm}'.  Try backspacing or searching for another search term.</p>
+    return (
+      <p>
+        There are no results for the search '{props.searchTerm}'. Try backspacing or searching for another search term.
+      </p>
+    );
   }
 };
 
-const processFuseSearchResults = (searchResults: any)  => {
-    return [...searchResults].sort((a, b) => a.refIndex - b.refIndex).map((i) => i.item);
-}
+const processFuseSearchResults = (searchResults: any[]) => {
+  return [...searchResults].sort((a, b) => a.refIndex - b.refIndex).map(i => i.item);
+};
 
 const fuse = new Fuse([], {
   threshold: 0.2,
-  keys: [
-      "item.album",
-      "item.artists"
-  ],
-})
+  keys: ['item.album', 'item.artists'],
+});
 
 const VinylCollectionPage: FC = () => {
   const [sortOrder, setSortOrder] = useState(SortOrder.ASC);
@@ -185,7 +186,7 @@ const VinylCollectionPage: FC = () => {
         return searchResults;
       }
     }
-  }
+  };
 
   const handleSortOrderChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(event.target.value);
@@ -228,8 +229,12 @@ const VinylCollectionPage: FC = () => {
       <br />
       <Select handleChange={sortTypeProps.handleChange} options={sortTypeProps.options} value={sortType} />
       <br />
-      <input type="text" onChange={handleSearchTermChange} placeholder='Search my vinyl collection!' />
-      <VinylCollection searchTerm={searchTerm} noSearchResults={noSearchResults} vinylCollection={orderCollection(fuseSearch(vinylCollection, searchTerm), sortType, sortOrder)} />
+      <input onChange={handleSearchTermChange} placeholder="Search my vinyl collection!" type="text" />
+      <VinylCollection
+        noSearchResults={noSearchResults}
+        searchTerm={searchTerm}
+        vinylCollection={orderCollection(fuseSearch(vinylCollection, searchTerm), sortType, sortOrder)}
+      />
     </>
   );
 };

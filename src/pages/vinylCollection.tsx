@@ -151,7 +151,7 @@ const VinylCollectionPage: FC = () => {
   const noSearchResults = useMemo(() => originalVinylCollection.length !== 0, [originalVinylCollection]);
 
   const getVinylCollection = async () => {
-    const url = 'https://ch9mysodje.execute-api.us-east-1.amazonaws.com/vinyl-collection';
+    const url = 'api/vinylCollection';
     const options = {
       method: 'GET',
     };

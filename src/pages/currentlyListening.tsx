@@ -64,7 +64,7 @@ const CurrentlyListening: FC = () => {
   const [currListening, setCurrListening] = useState<CurrentlyListeningPayload>({isPlaying: false});
 
   const getCurrentlyListening = async () => {
-    const url = 'https://3h2fle7snh.execute-api.us-east-1.amazonaws.com/currently-listening';
+    const url = '/api/currentlyListening';
 
     const options = {
       method: 'GET',

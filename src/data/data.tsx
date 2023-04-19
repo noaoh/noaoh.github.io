@@ -167,7 +167,7 @@ export const aboutData: About = {
   description: `More about me!`,
   aboutItems: [
     {label: 'Location', text: 'Bentonville, AR', Icon: MapIcon},
-    {label: 'Age', text: '24', Icon: CalendarIcon},
+    {label: 'Age', text: '25', Icon: CalendarIcon},
     {label: 'Nationality', text: 'American', Icon: FlagIcon},
     {label: 'Interests', text: 'Video Games, Music, Linux, Programming', Icon: SparklesIcon},
     {label: 'Studied At', text: 'University of Arkansas', Icon: AcademicCapIcon},

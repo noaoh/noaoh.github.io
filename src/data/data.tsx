@@ -24,7 +24,7 @@ import profilepic from '../../public/profilepic.jpg';
 import GithubIcon from '../components/Icon/GithubIcon';
 import LinkedInIcon from '../components/Icon/LinkedInIcon';
 import StackOverflowIcon from '../components/Icon/StackOverflowIcon';
-import {gatsbyLinkCreator} from '../utils';
+import {blogLinkCreator} from '../utils';
 import {
   About,
   ContactSection,
@@ -57,11 +57,11 @@ export const HomepageSections = {
   Portfolio: {urlName: 'portfolio', displayName: 'portfolio', isOnNavBar: false, isOnHomepage: false},
   Contact: {urlName: 'contact', displayName: 'contact', isOnNavBar: true, isOnHomepage: true},
   Blog: {
-    urlName: gatsbyLinkCreator(NODE_ENV),
+    urlName: blogLinkCreator(NODE_ENV),
     displayName: 'My Blog',
-    isOnNavBar: true,
+    isOnNavBar: false,
     isOnHomepage: false,
-    isOnGatsby: true,
+    isOnBlog: true,
   },
   CurrentlyListening: {
     urlName: 'currentlyListening',
@@ -85,11 +85,11 @@ export const CurrentlyListeningSections = {
     isOnHomepage: false,
   },
   Blog: {
-    urlName: gatsbyLinkCreator(NODE_ENV),
+    urlName: blogLinkCreator(NODE_ENV),
     displayName: 'My Blog',
-    isOnNavBar: true,
+    isOnNavBar: false,
     isOnHomepage: false,
-    isOnGatsby: true,
+    isOnBlog: true,
   },
   VinyCollection: {
     urlName: 'vinylCollection',
@@ -107,11 +107,11 @@ export const VinylCollectionSections = {
     isOnHomepage: false,
   },
   Blog: {
-    urlName: gatsbyLinkCreator(NODE_ENV),
+    urlName: blogLinkCreator(NODE_ENV),
     displayName: 'My Blog',
-    isOnNavBar: true,
+    isOnNavBar: false,
     isOnHomepage: false,
-    isOnGatsby: true,
+    isOnBLog: true,
   },
   CurrentlyListening: {
     urlName: 'currentlyListening',
@@ -136,11 +136,12 @@ export const heroData: Hero = {
       </p>
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
         In my free time time, you can catch me running, playing video games, hiking, reading, or coding up a new
-        project! I also have a{' '}
-        <a className="hover:text-bright-red" href={gatsbyLinkCreator(NODE_ENV)}>
+        project!
+        {/*I also have a{' '}
+        <a className="hover:text-bright-red" href={blogLinkCreator(NODE_ENV)}>
           blog
         </a>
-        .
+        */}
       </p>
     </>
   ),

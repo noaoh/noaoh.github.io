@@ -11,6 +11,6 @@ export const and = (data: Array<string>, separator = '&', oxfordComma = false): 
   }
 };
 
-export const gatsbyLinkCreator = (NODE_ENV: string) => {
-  return NODE_ENV && NODE_ENV === 'development' ? 'http://localhost:8000' : '/blog';
+export const blogLinkCreator = (NODE_ENV: string) => {
+  return NODE_ENV && NODE_ENV === 'development' ? 'http://localhost:1313' : 'https://blog.noaoh.dev';
 };

@@ -59,7 +59,7 @@ export const HomepageSections = {
   Blog: {
     urlName: blogLinkCreator(NODE_ENV),
     displayName: 'My Blog',
-    isOnNavBar: false,
+    isOnNavBar: true,
     isOnHomepage: false,
     isOnBlog: true,
   },
@@ -87,7 +87,7 @@ export const CurrentlyListeningSections = {
   Blog: {
     urlName: blogLinkCreator(NODE_ENV),
     displayName: 'My Blog',
-    isOnNavBar: false,
+    isOnNavBar: true,
     isOnHomepage: false,
     isOnBlog: true,
   },
@@ -109,9 +109,9 @@ export const VinylCollectionSections = {
   Blog: {
     urlName: blogLinkCreator(NODE_ENV),
     displayName: 'My Blog',
-    isOnNavBar: false,
+    isOnNavBar: true,
     isOnHomepage: false,
-    isOnBLog: true,
+    isOnBlog: true,
   },
   CurrentlyListening: {
     urlName: 'currentlyListening',
@@ -135,13 +135,8 @@ export const heroData: Hero = {
         making it easier to get the right appointment, with the right professional, at the right time!
       </p>
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
-        In my free time time, you can catch me running, playing video games, hiking, reading, or coding up a new
+        In my free time, you can catch me running, playing video games, hiking, reading, or coding up a new
         project!
-        {/*I also have a{' '}
-        <a className="hover:text-bright-red" href={blogLinkCreator(NODE_ENV)}>
-          blog
-        </a>
-        */}
       </p>
     </>
   ),

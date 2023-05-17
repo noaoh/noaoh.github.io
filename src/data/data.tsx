@@ -135,8 +135,7 @@ export const heroData: Hero = {
         making it easier to get the right appointment, with the right professional, at the right time!
       </p>
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
-        In my free time, you can catch me running, playing video games, hiking, reading, or coding up a new
-        project!
+        In my free time, you can catch me running, playing video games, hiking, reading, or coding up a new project!
       </p>
     </>
   ),

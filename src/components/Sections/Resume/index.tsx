@@ -18,7 +18,7 @@ const Resume: FC = memo(() => {
         <ResumeSection title="Skills">
           <p className="pb-8">
             I have worked primarily in backend systems written in Node.JS or C#, but have started looking at frontend to
-            develop this site
+            develop this site.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2">
             {skills.map((skillgroup, index) => (

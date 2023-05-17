@@ -1,13 +1,12 @@
 import fetch from 'cross-fetch';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import {FC, PropsWithChildren, useEffect, useState} from 'react';
+import {Textfit} from 'react-textfit';
 
+import OtherHeader from '../components/Sections/OtherHeader';
 import {CurrentlyListeningSections} from '../data/data';
 import {SectionType} from '../data/dataDef';
 import {and} from '../utils';
-
-const OtherHeader = dynamic(() => import('../components/Sections/OtherHeader'), {ssr: false});
 
 interface CurrentlyListeningPayload {
   isPlaying: boolean;
@@ -32,31 +31,27 @@ interface TrackProps {
 
 const Podcast: FC<PropsWithChildren<PodcastProps>> = (props: PodcastProps) => {
   return (
-    <div>
-      <p className="text-2xl text-white">
-        I am currently listening to the episode <strong>{props.episode}</strong> from the podcast{' '}
-        <strong>{props.podcast}</strong>.
-      </p>
-    </div>
+    <Textfit className="text-white" min={20} mode="multi">
+      I am currently listening to the episode <strong>{props.episode}</strong> from the podcast{' '}
+      <strong>{props.podcast}</strong>.
+    </Textfit>
   );
 };
 
 const Track: FC<PropsWithChildren<TrackProps>> = (props: TrackProps) => {
   return (
-    <div>
-      <p className="text-2xl text-white">
-        I am currently listening to the track <strong>{props.track}</strong> by{' '}
-        <strong>{and(props.artists as string[], 'and')}</strong> off of the album <strong>{props.album}</strong>.
-      </p>
-    </div>
+    <Textfit className="text-white" min={20} mode="multi">
+      I am currently listening to the track <strong>{props.track}</strong> by{' '}
+      <strong>{and(props.artists as string[], 'and')}</strong> off of the album <strong>{props.album}</strong>.
+    </Textfit>
   );
 };
 
 const NotCurrentlyListening: FC = () => {
   return (
-    <div>
-      <p className="text-2xl text-white">I am not currently listening to anything.</p>
-    </div>
+    <Textfit className="text-white" min={20} mode="single">
+      I am not currently listening to anything.
+    </Textfit>
   );
 };
 

@@ -12,7 +12,7 @@ interface HeaderProps {
   sections: SectionType[];
 }
 
-const Header: FC<PropsWithChildren<HeaderProps>> = memo((props: HeaderProps) => {
+const Header: FC<PropsWithChildren<HeaderProps>> = memo((props: HeaderProps): JSX.Element => {
   const {sections} = props;
   const [currentSection] = useState<SectionType | null>(null);
   const navSections = useMemo(() => Object.values(sections).filter(section => section.isOnNavBar), [sections]);

@@ -1,18 +1,16 @@
 import classNames from 'classnames';
 import {compareAsc, compareDesc} from 'date-fns';
 import Fuse from 'fuse.js';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
 import React, {ChangeEvent, FC, PropsWithChildren, useEffect, useMemo, useState} from 'react';
+import {Textfit} from 'react-textfit';
 
+import Header from '../components/Sections/OtherHeader';
 import {Select, SelectProps} from '../components/Select';
 import {VinylCollectionSections} from '../data/data';
 import {SectionType} from '../data/dataDef';
 import {and} from '../utils';
-
-// eslint-disable-next-line react-memo/require-memo
-const OtherHeader = dynamic(() => import('../components/Sections/OtherHeader'), {ssr: false});
 
 const SortOrder = {
   ASC: 'ASC',
@@ -91,13 +89,13 @@ const VinylItemElement: FC<PropsWithChildren<VinylItem>> = (props: VinylItem) =>
           src={props.thumbnail}
           width="150"
         />{' '}
-        <p className="ml-2 text-5xl text-white">
+        <Textfit className="ml-2 text-white" min={20} mode="multi">
           <strong>{props.artists.length === 1 ? 'Artist:' : 'Artists:'}</strong> {and(props.artists, 'and')}
           <br />
           <strong>Album:</strong> {props.album}
           <br />
           <strong>Date Added:</strong> {formattedDate}
-        </p>
+        </Textfit>
       </>
     </div>
   );
@@ -105,7 +103,11 @@ const VinylItemElement: FC<PropsWithChildren<VinylItem>> = (props: VinylItem) =>
 
 const VinylCollection: FC<PropsWithChildren<VinylCollectionProps>> = props => {
   if (props.vinylCollection.length === 0 && !props.noSearchResults) {
-    return <p>My vinyl collection is loading.</p>;
+    return (
+      <Textfit className="text-white" min={20} mode="single">
+        My vinyl collection is loading.
+      </Textfit>
+    );
   } else if (props.vinylCollection.length !== 0) {
     return (
       <ol>
@@ -126,9 +128,9 @@ const VinylCollection: FC<PropsWithChildren<VinylCollectionProps>> = props => {
     );
   } else {
     return (
-      <p>
+      <Textfit className="text-white" min={20} mode="multi">
         There are no results for the search '{props.searchTerm}'. Try backspacing or searching for another search term.
-      </p>
+      </Textfit>
     );
   }
 };
@@ -221,15 +223,22 @@ const VinylCollectionPage: FC = () => {
       <Head>
         <title>My Vinyl Collection</title>
       </Head>
-      <OtherHeader sections={VinylCollectionSections as unknown as SectionType[]} />
-      <br />
-      <br />
-      <br />
-      <Select handleChange={sortOrderProps.handleChange} options={sortOrderProps.options} value={sortOrder} />
+      <Header sections={VinylCollectionSections as unknown as SectionType[]} />
+      <Select
+        className="mt-20"
+        handleChange={sortOrderProps.handleChange}
+        options={sortOrderProps.options}
+        value={sortOrder}
+      />
       <br />
       <Select handleChange={sortTypeProps.handleChange} options={sortTypeProps.options} value={sortType} />
       <br />
-      <input onChange={handleSearchTermChange} placeholder="Search my vinyl collection!" type="text" />
+      <input
+        className="rounded-md"
+        onChange={handleSearchTermChange}
+        placeholder="Search my vinyl collection!"
+        type="text"
+      />
       <VinylCollection
         noSearchResults={noSearchResults}
         searchTerm={searchTerm}

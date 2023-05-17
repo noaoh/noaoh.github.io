@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, {ChangeEvent, FC, PropsWithChildren} from 'react';
 
 type SelectChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => void;
@@ -11,12 +12,16 @@ interface SelectProps {
   options: SelectText[];
   handleChange: SelectChangeHandler;
   value: string;
+  className?: string;
 }
 
 const Select: FC<PropsWithChildren<SelectProps>> = (props: SelectProps) => {
   return (
     <select
-      className="block appearance-none rounded border border-gray-400 bg-white py-1 px-10 leading-tight focus:outline-none"
+      className={classNames(
+        'block appearance-none rounded border border-gray-400 bg-white py-1 px-10 leading-tight focus:outline-none',
+        props.className,
+      )}
       onChange={props.handleChange}
       value={props.value}>
       {props.options.map((option, i) => {

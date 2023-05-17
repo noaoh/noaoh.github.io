@@ -104,8 +104,8 @@ const VinylItemElement: FC<PropsWithChildren<VinylItem>> = (props: VinylItem) =>
 const VinylCollection: FC<PropsWithChildren<VinylCollectionProps>> = props => {
   if (props.vinylCollection.length === 0 && !props.noSearchResults) {
     return (
-      <Textfit className="text-white" min={20} mode="single">
-        My vinyl collection is loading.
+      <Textfit className="text-white" max={30} mode="single">
+        My vinyl collection is loading...
       </Textfit>
     );
   } else if (props.vinylCollection.length !== 0) {

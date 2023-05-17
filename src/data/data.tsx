@@ -51,11 +51,11 @@ export const homePageMeta: HomepageMeta = {
  * Section definition
  */
 export const HomepageSections = {
-  Hero: {urlName: 'hero', displayName: 'hero', isOnNavBar: false, isOnHomepage: true},
-  About: {urlName: 'about', displayName: 'about', isOnNavBar: true, isOnHomepage: true},
-  Resume: {urlName: 'resume', displayName: 'resume', isOnNavBar: true, isOnHomepage: true},
-  Portfolio: {urlName: 'portfolio', displayName: 'portfolio', isOnNavBar: false, isOnHomepage: false},
-  Contact: {urlName: 'contact', displayName: 'contact', isOnNavBar: true, isOnHomepage: true},
+  Hero: {urlName: 'hero', displayName: 'Hero', isOnNavBar: false, isOnHomepage: true},
+  About: {urlName: 'about', displayName: 'About', isOnNavBar: true, isOnHomepage: true},
+  Resume: {urlName: 'resume', displayName: 'Resume', isOnNavBar: true, isOnHomepage: true},
+  Portfolio: {urlName: 'portfolio', displayName: 'Portfolio', isOnNavBar: false, isOnHomepage: false},
+  Contact: {urlName: 'contact', displayName: 'Contact', isOnNavBar: true, isOnHomepage: true},
   Blog: {
     urlName: blogLinkCreator(NODE_ENV),
     displayName: 'My Blog',
@@ -65,7 +65,7 @@ export const HomepageSections = {
   },
   CurrentlyListening: {
     urlName: 'currentlyListening',
-    displayName: 'Currently listening',
+    displayName: 'Currently Listening',
     isOnNavBar: true,
     isOnHomepage: false,
   },

@@ -122,6 +122,7 @@ const NavItem: FC<{
   return (
     <Link
       href={section.isOnBlog ? section.urlName : section.isOnHomepage ? `/#${section.urlName}` : `/${section.urlName}`}
+      legacyBehavior
       passHref>
       <a className={classNames(current ? activeClass : inactiveClass)} key={section.urlName} onClick={onClick}>
         {section.displayName}

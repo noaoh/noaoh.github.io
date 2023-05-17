@@ -1,4 +1,4 @@
-import {DevicePhoneMobileIcon, EnvelopeIcon,MapPinIcon} from '@heroicons/react/24/outline';
+import {DevicePhoneMobileIcon, EnvelopeIcon, MapPinIcon} from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import {FC, memo} from 'react';
 

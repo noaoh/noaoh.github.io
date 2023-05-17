@@ -1,49 +1,46 @@
 import fetch from 'cross-fetch';
 import Head from 'next/head';
+import Image from 'next/image';
 import {FC, PropsWithChildren, useEffect, useState} from 'react';
 import {Textfit} from 'react-textfit';
 
 import OtherHeader from '../components/Sections/OtherHeader';
 import {CurrentlyListeningSections} from '../data/data';
 import {SectionType} from '../data/dataDef';
-import {and} from '../utils';
 
 interface CurrentlyListeningPayload {
   isPlaying: boolean;
-  type?: string;
-  artists?: Array<string>;
+  artist?: string;
   album?: string;
-  track?: string;
-  episode?: string;
-  podcast?: string;
-}
-
-interface PodcastProps {
-  episode: string;
-  podcast: string;
+  song?: string;
+  thumbnail?: string;
 }
 
 interface TrackProps {
-  artists: Array<string>;
+  artist: string;
   album: string;
-  track: string;
+  song: string;
+  thumbnail: string;
 }
-
-const Podcast: FC<PropsWithChildren<PodcastProps>> = (props: PodcastProps) => {
-  return (
-    <Textfit className="text-white" min={20} mode="multi">
-      I am currently listening to the episode <strong>{props.episode}</strong> from the podcast{' '}
-      <strong>{props.podcast}</strong>.
-    </Textfit>
-  );
-};
 
 const Track: FC<PropsWithChildren<TrackProps>> = (props: TrackProps) => {
   return (
-    <Textfit className="text-white" min={20} mode="multi">
-      I am currently listening to the track <strong>{props.track}</strong> by{' '}
-      <strong>{and(props.artists as string[], 'and')}</strong> off of the album <strong>{props.album}</strong>.
-    </Textfit>
+    <div className='relative p-4 align-center flex flex-wrap'>
+      <Image
+        alt="Image didn't load"
+        className="w-174 h-174 mr-4"
+        height={174}
+        width={174}
+        src={props.thumbnail}
+      />
+      <Textfit className="ml-2 text-white" min={20} mode="multi">
+        <strong>Artist</strong>: {props.artist}
+        <br />
+        <strong>Album</strong>: {props.album}
+        <br />
+        <strong>Song</strong>: {props.song}
+      </Textfit>
+    </div>
   );
 };
 
@@ -95,16 +92,13 @@ const CurrentlyListening: FC = () => {
       <div className="height: 50vh flex h-screen flex-col items-center justify-center">
         <h1 className="height: 100vh text-2xl font-bold text-white">What I'm Currently Listening to</h1>
         {currListening.isPlaying ? (
-          currListening.type === 'episode' ? (
-            <Podcast episode={currListening.episode as string} podcast={currListening.podcast as string} />
-          ) : (
             <Track
-              album={currListening.album as string}
-              artists={currListening.artists as string[]}
-              track={currListening.track as string}
+              album={currListening.album!}
+              artist={currListening.artist!}
+              song={currListening.song!}
+              thumbnail={currListening.thumbnail!}
             />
-          )
-        ) : (
+          ) : (
           <NotCurrentlyListening />
         )}
       </div>

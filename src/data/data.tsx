@@ -1,12 +1,12 @@
 import {
   AcademicCapIcon,
+  ArrowDownTrayIcon,
+  BuildingOffice2Icon,
   CalendarIcon,
-  DownloadIcon,
   FlagIcon,
   MapIcon,
-  OfficeBuildingIcon,
   SparklesIcon,
-} from '@heroicons/react/outline';
+} from '@heroicons/react/24/outline';
 
 import heroImage from '../../public/header-background.webp';
 import porfolioImage1 from '../../public/portfolio/portfolio-1.jpg';
@@ -144,7 +144,7 @@ export const heroData: Hero = {
       href: '/noah-holt-resume.pdf',
       text: 'Resume',
       primary: true,
-      Icon: DownloadIcon,
+      Icon: ArrowDownTrayIcon,
     },
     {
       href: `#${HomepageSections.Contact.urlName}`,
@@ -166,7 +166,7 @@ export const aboutData: About = {
     {label: 'Nationality', text: 'American', Icon: FlagIcon},
     {label: 'Interests', text: 'Video Games, Music, Linux, Programming', Icon: SparklesIcon},
     {label: 'Studied At', text: 'University of Arkansas', Icon: AcademicCapIcon},
-    {label: 'Employment', text: 'DexCare', Icon: OfficeBuildingIcon},
+    {label: 'Employment', text: 'DexCare', Icon: BuildingOffice2Icon},
   ],
 };
 

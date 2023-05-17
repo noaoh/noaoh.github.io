@@ -1,5 +1,5 @@
 import {Dialog, Transition} from '@headlessui/react';
-import {MenuAlt3Icon} from '@heroicons/react/outline';
+import {Bars3BottomRightIcon} from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import Link from 'next/link';
 import {FC, Fragment, memo, PropsWithChildren, useCallback, useMemo, useState} from 'react';
@@ -67,7 +67,7 @@ const MobileNav: FC<{navSections: SectionType[]; currentSection: SectionType | n
           aria-label="Menu Button"
           className="fixed top-2 right-2 z-40 rounded-md bg-bright-red p-2 ring-offset-gray-800/60 hover:bg-red-400 focus:outline-none focus:ring-0 focus-visible:ring-2 focus-visible:ring-bright-red focus-visible:ring-offset-2 sm:hidden"
           onClick={toggleOpen}>
-          <MenuAlt3Icon className="h-8 w-8 text-white" />
+          <Bars3BottomRightIcon className="h-8 w-8 text-white" />
           <span className="sr-only">Open sidebar</span>
         </button>
         <Transition.Root as={Fragment} show={isOpen}>

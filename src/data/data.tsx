@@ -20,7 +20,7 @@ import porfolioImage8 from '../../public/portfolio/portfolio-8.jpg';
 import porfolioImage9 from '../../public/portfolio/portfolio-9.jpg';
 import porfolioImage10 from '../../public/portfolio/portfolio-10.jpg';
 import porfolioImage11 from '../../public/portfolio/portfolio-11.jpg';
-import profilepic from '../../public/profilepic.jpg';
+import profilepic from '../../public/profilepic.webp';
 import GithubIcon from '../components/Icon/GithubIcon';
 import LinkedInIcon from '../components/Icon/LinkedInIcon';
 import StackOverflowIcon from '../components/Icon/StackOverflowIcon';

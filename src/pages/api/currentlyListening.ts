@@ -1,9 +1,12 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 
 const getCurrentlyListening = async (lastFmUser: string, lastfmApiKey: string) => {
-  const response = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${lastFmUser}&api_key=${lastfmApiKey}&format=json`, {
-    method: 'GET',
-  });
+  const response = await fetch(
+    `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${lastFmUser}&api_key=${lastfmApiKey}&format=json`,
+    {
+      method: 'GET',
+    },
+  );
 
   if (response.status !== 200) {
     return {
@@ -17,9 +20,9 @@ const getCurrentlyListening = async (lastFmUser: string, lastfmApiKey: string) =
 };
 
 const parseCurrentlyListening = (data: any) => {
-  const { recenttracks } = data;
-  const { track } = recenttracks;
-  const { artist, album, image, name, '@attr': attr } = track[0];
+  const {recenttracks} = data;
+  const {track} = recenttracks;
+  const {artist, album, image, name, '@attr': attr} = track[0];
   let nowplaying = false;
   if (attr) {
     nowplaying = attr.nowplaying;
@@ -35,7 +38,7 @@ const parseCurrentlyListening = (data: any) => {
       artist: artist['#text'],
       album: album['#text'],
       song: name,
-      thumbnail
+      thumbnail,
     };
   }
 };
@@ -44,7 +47,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method !== 'GET') {
     res.status(405);
   } else {
-    const { LASTFM_API_KEY: lastfmApiKey, LASTFM_USER: lastfmUser } = process.env;
+    const {LASTFM_API_KEY: lastfmApiKey, LASTFM_USER: lastfmUser} = process.env;
     try {
       const currentlyListening = await getCurrentlyListening(lastfmUser!, lastfmApiKey!);
       const parsedCurrentlyListening = parseCurrentlyListening(currentlyListening);

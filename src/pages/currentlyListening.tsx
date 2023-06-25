@@ -25,14 +25,8 @@ interface TrackProps {
 
 const Track: FC<PropsWithChildren<TrackProps>> = (props: TrackProps) => {
   return (
-    <div className='relative p-4 align-center flex flex-wrap'>
-      <Image
-        alt="Image didn't load"
-        className="w-174 h-174 mr-4"
-        height={174}
-        width={174}
-        src={props.thumbnail}
-      />
+    <div className="align-center relative flex flex-wrap p-4">
+      <Image alt="Image didn't load" className="w-174 h-174 mr-4" height={174} src={props.thumbnail} width={174} />
       <Textfit className="ml-2 text-white" min={20} mode="multi">
         <strong>Artist</strong>: {props.artist}
         <br />
@@ -92,13 +86,13 @@ const CurrentlyListening: FC = () => {
       <div className="height: 50vh flex h-screen flex-col items-center justify-center">
         <h1 className="height: 100vh text-2xl font-bold text-white">What I'm Currently Listening to</h1>
         {currListening.isPlaying ? (
-            <Track
-              album={currListening.album!}
-              artist={currListening.artist!}
-              song={currListening.song!}
-              thumbnail={currListening.thumbnail!}
-            />
-          ) : (
+          <Track
+            album={currListening.album!}
+            artist={currListening.artist!}
+            song={currListening.song!}
+            thumbnail={currListening.thumbnail!}
+          />
+        ) : (
           <NotCurrentlyListening />
         )}
       </div>

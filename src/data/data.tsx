@@ -44,7 +44,7 @@ const NODE_ENV = process?.env?.NODE_ENV;
  */
 export const homePageMeta: HomepageMeta = {
   title: "Noah Holt's Personal Website",
-  description: "Noah Holt's Personal Website built with Tim Baker's react resume template",
+  description: "Welcome to my portfolio!  Hope you enjoy your stay!",
 };
 
 /**

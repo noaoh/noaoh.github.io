@@ -4,8 +4,7 @@ import {
   BuildingOffice2Icon,
   CalendarIcon,
   FlagIcon,
-  MapIcon,
-  SparklesIcon,
+  MapIcon, SparklesIcon,
 } from '@heroicons/react/24/outline';
 
 import heroImage from '../../public/header-background.webp';
@@ -75,6 +74,12 @@ export const HomepageSections = {
     isOnNavBar: true,
     isOnHomepage: false,
   },
+  GithubStars: {
+    urlName: 'githubStars',
+    displayName: 'My Github Stars',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  }
 } as const;
 
 export const CurrentlyListeningSections = {
@@ -97,6 +102,12 @@ export const CurrentlyListeningSections = {
     isOnNavBar: true,
     isOnHomepage: false,
   },
+  GithubStars: {
+    urlName: 'githubStars',
+    displayName: 'My Github Stars',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  }
 } as const;
 
 export const VinylCollectionSections = {
@@ -119,7 +130,41 @@ export const VinylCollectionSections = {
     isOnNavBar: true,
     isOnHomepage: false,
   },
+  GithubStars: {
+    urlName: 'githubStars',
+    displayName: 'My Github Stars',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  }
 } as const;
+
+export const GithubStarsSections = {
+  Homepage: {
+    urlName: '',
+    displayName: 'Home',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  },
+  Blog: {
+    urlName: blogLinkCreator(NODE_ENV),
+    displayName: 'My Blog',
+    isOnNavBar: true,
+    isOnHomepage: false,
+    isOnBlog: true,
+  },
+  CurrentlyListening: {
+    urlName: 'currentlyListening',
+    displayName: 'Currently Listening',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  },
+  VinylCollection: {
+    urlName: 'vinylCollection',
+    displayName: 'Vinyl Collection',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  },
+}
 
 /**
  * Hero section

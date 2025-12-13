@@ -70,16 +70,16 @@ const GithubStarsListPage: FC = () => {
       </Head>
       <Header sections={GithubStarsSections as unknown as SectionType[]} />
       <br />
-      <ol className="mt-20">
+      <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
       {githubStarsList.map((item) => {
         const {nodeId} = item;
         return (
-          <li className="mb-5" key={nodeId}>
+          <div key={nodeId}>
             <RepoCard repo={item} />
-          </li>
+          </div>
         )
       })}
-      </ol>
+      </div>
     </>
   );
 }

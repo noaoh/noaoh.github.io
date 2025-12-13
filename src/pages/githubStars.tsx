@@ -1,12 +1,12 @@
 import Head from 'next/head';
-import React, {ChangeEvent, FC, PropsWithChildren, useEffect, useMemo, useState} from 'react';
-import { GithubStarsSections } from '../data/data';
-import { SectionType } from '../data/dataDef';
+import React, {FC, useEffect, useState} from 'react';
 
 import Header from '../components/Sections/OtherHeader';
+import {GithubStarsSections} from '../data/data';
+import {SectionType} from '../data/dataDef';
 
-const RepoCard = ({ repo }) => {
-  const { htmlUrl, description, name, fullName, stargazersCount } = repo;
+const RepoCard = ({repo}: {repo: any}) => {
+  const {htmlUrl, description, name, fullName, stargazersCount} = repo;
   
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg p-6 bg-black">
@@ -16,7 +16,7 @@ const RepoCard = ({ repo }) => {
       </p>
       <p className="text-sm text-gray-400 mb-4">Full Name: {fullName}</p>
       <div className="flex items-center justify-between">
-        <a href={htmlUrl} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-600">
+        <a className="text-blue-400 hover:text-blue-600" href={htmlUrl} rel="noopener noreferrer" target="_blank">
           View Repository
         </a>
         <div className="flex items-center">
@@ -72,9 +72,9 @@ const GithubStarsListPage: FC = () => {
       <br />
       <ol className="mt-20">
       {githubStarsList.map((item) => {
-        const { nodeId } = item;
+        const {nodeId} = item;
         return (
-          <li key={nodeId} className="mb-5">
+          <li className="mb-5" key={nodeId}>
             <RepoCard repo={item} />
           </li>
         )

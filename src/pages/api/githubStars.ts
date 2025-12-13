@@ -1,6 +1,6 @@
+import {Octokit} from "@octokit/core";
+import {camelCase,mapKeys, pick} from "lodash-es";
 import {NextApiRequest, NextApiResponse} from 'next';
-import { Octokit } from "@octokit/core";
-import { pick, mapKeys, camelCase } from "lodash-es";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
@@ -11,9 +11,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         auth: process.env.GITHUB_TOKEN
       });
 
-      const resp = await octokit.request('GET /users/{username}/starred?per_page=10', {
+      const resp = await octokit.request('GET /users/{username}/starred?per_page=10',{
         username: 'noaoh',
-        headers: {
+        headers:{
           'X-GitHub-Api-Version': '2022-11-28'
         }
       });
@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } catch (e) {
       console.error(e);
       res.status(500);
-      res.json({ error: 'unable to retrieve github stars' });
+      res.json({error: 'unable to retrieve github stars'});
     }
   }
 }

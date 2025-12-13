@@ -33,7 +33,7 @@ import {
   PortfolioItem,
   SkillGroup,
   Social,
-  TimelineItem,
+  TimelineItemProps,
 } from './dataDef';
 
 const NODE_ENV = process?.env?.NODE_ENV;
@@ -355,7 +355,7 @@ export const portfolioItems: PortfolioItem[] = [
 /**
  * Resume section -- TODO: Standardize resume contact format or offer MDX
  */
-export const education: TimelineItem[] = [
+export const education: TimelineItemProps[] = [
   {
     date: 'August 2016 - May 2020',
     location: 'University of Arkansas',
@@ -370,7 +370,7 @@ export const education: TimelineItem[] = [
   },
 ];
 
-export const experience: TimelineItem[] = [
+export const experience: TimelineItemProps[] = [
   {
     date: 'October 2022 - Present',
     location: 'DexCare',

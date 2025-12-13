@@ -6,6 +6,7 @@ import Image from 'next/image';
 import React, {ChangeEvent, FC, PropsWithChildren, useEffect, useMemo, useState} from 'react';
 import {Textfit} from 'react-textfit';
 
+import GridView from '../components/GridView';
 import Header from '../components/Sections/OtherHeader';
 import {Select, SelectProps} from '../components/Select';
 import {VinylCollectionSections} from '../data/data';
@@ -110,7 +111,7 @@ const VinylCollection: FC<PropsWithChildren<VinylCollectionProps>> = props => {
     );
   } else if (props.vinylCollection.length !== 0) {
     return (
-      <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+          <GridView>
         {props.vinylCollection.map(({item, id}) => {
           return (
             <div key={id}>
@@ -124,7 +125,7 @@ const VinylCollection: FC<PropsWithChildren<VinylCollectionProps>> = props => {
             </div>
           );
         })}
-      </div>
+      </GridView>
     );
   } else {
     return (

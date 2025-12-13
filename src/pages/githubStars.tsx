@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import React, {FC, useEffect, useState} from 'react';
 
+import GridView from '../components/GridView';
 import Header from '../components/Sections/OtherHeader';
 import {GithubStarsSections} from '../data/data';
 import {SectionType} from '../data/dataDef';
@@ -70,7 +71,7 @@ const GithubStarsListPage: FC = () => {
       </Head>
       <Header sections={GithubStarsSections as unknown as SectionType[]} />
       <br />
-      <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+      <GridView>
       {githubStarsList.map((item) => {
         const {nodeId} = item;
         return (
@@ -79,7 +80,7 @@ const GithubStarsListPage: FC = () => {
           </div>
         )
       })}
-      </div>
+      </GridView>
     </>
   );
 }

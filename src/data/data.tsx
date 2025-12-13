@@ -79,6 +79,12 @@ export const HomepageSections = {
     displayName: 'My Github Stars',
     isOnNavBar: true,
     isOnHomepage: false,
+  },
+  HnFavorites: {
+    urlName: 'hnFavorites',
+    displayName: 'My HN Favorites',
+    isOnNavBar: true,
+    isOnHomepage: false,
   }
 } as const;
 
@@ -107,6 +113,12 @@ export const CurrentlyListeningSections = {
     displayName: 'My Github Stars',
     isOnNavBar: true,
     isOnHomepage: false,
+  },
+  HnFavorites: {
+    urlName: 'hnFavorites',
+    displayName: 'My HN Favorites',
+    isOnNavBar: true,
+    isOnHomepage: false,
   }
 } as const;
 
@@ -133,6 +145,12 @@ export const VinylCollectionSections = {
   GithubStars: {
     urlName: 'githubStars',
     displayName: 'My Github Stars',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  },
+  HnFavorites: {
+    urlName: 'hnFavorites',
+    displayName: 'My HN Favorites',
     isOnNavBar: true,
     isOnHomepage: false,
   }
@@ -164,7 +182,47 @@ export const GithubStarsSections = {
     isOnNavBar: true,
     isOnHomepage: false,
   },
+  HnFavorites: {
+    urlName: 'hnFavorites',
+    displayName: 'My HN Favorites',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  }
 }
+
+export const HnFavoritesSections = {
+  Homepage: {
+    urlName: '',
+    displayName: 'Home',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  },
+  Blog: {
+    urlName: blogLinkCreator(NODE_ENV),
+    displayName: 'My Blog',
+    isOnNavBar: true,
+    isOnHomepage: false,
+    isOnBlog: true,
+  },
+  CurrentlyListening: {
+    urlName: 'currentlyListening',
+    displayName: 'Currently Listening',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  },
+  VinylCollection: {
+    urlName: 'vinylCollection',
+    displayName: 'Vinyl Collection',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  },
+  GithubStars: {
+    urlName: 'githubStars',
+    displayName: 'My Github Stars',
+    isOnNavBar: true,
+    isOnHomepage: false,
+  }
+};
 
 /**
  * Hero section

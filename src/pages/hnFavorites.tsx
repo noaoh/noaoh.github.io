@@ -7,7 +7,7 @@ import {HnFavoritesSections} from '../data/data';
 import {SectionType} from '../data/dataDef';
 
 const FavoriteCard = ({fav}: {fav: any}) => {
-  const {itemUrl, title, by, score} = fav;
+  const {by, itemUrl, score, title} = fav;
   
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg p-6 bg-black">
@@ -70,7 +70,7 @@ const HnFavoritesPage: FC = () => {
       <br />
       <GridView>
         {hnFavoritesList.favorites.map((fav: any) => (
-          <FavoriteCard key={fav.id} fav={fav} />
+          <FavoriteCard fav={fav} key={fav.id}/>
         ))}
       </GridView>
     </>

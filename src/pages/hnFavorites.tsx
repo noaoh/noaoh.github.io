@@ -29,7 +29,7 @@ const FavoriteCard = ({fav}: {fav: any}) => {
 };
 
 const HnFavoritesPage: FC = () => {
-  const [hnFavoritesList, setHnFavoritesList] = useState<any[]>([]);
+  const [hnFavoritesList, setHnFavoritesList] = useState<{ favorites: any[] }>({favorites: []});
   const [loading, setLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
@@ -69,7 +69,7 @@ const HnFavoritesPage: FC = () => {
       <Header sections={HnFavoritesSections as unknown as SectionType[]} />
       <br />
       <GridView>
-        {hnFavoritesList.favorites.map((fav) => (
+        {hnFavoritesList.favorites.map((fav: any) => (
           <FavoriteCard key={fav.id} fav={fav} />
         ))}
       </GridView>

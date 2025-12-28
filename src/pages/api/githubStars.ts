@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
 
       const resp = await octokit.request('GET /users/{username}/starred?per_page=10',{
-        username: 'noaoh',
+        username: 'nholtware',
         headers:{
           'X-GitHub-Api-Version': '2022-11-28'
         }
